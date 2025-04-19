@@ -18,6 +18,7 @@ import { ParamParsePipe } from '../../../common/pipes/param-parse.pipe';
 
 import { AuthUser } from 'src/common/interfaces/auth.interface';
 import { User } from 'src/common/decorators/user.decorator';
+import { Public } from 'src/common/decorators/public.decorator';
 
 @Controller('restaurants/:restaurantId/reviews')
 export class ReviewController {
@@ -36,6 +37,7 @@ export class ReviewController {
     });
   }
 
+  @Public()
   @Get()
   async findAllByRestaurantId(
     @Param('restaurantId') restaurantId: string,

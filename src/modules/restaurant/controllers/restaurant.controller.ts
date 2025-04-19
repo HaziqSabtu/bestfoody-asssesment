@@ -18,6 +18,7 @@ import { ParamParsePipe } from '../../../common/pipes/param-parse.pipe';
 
 import { AuthUser } from 'src/common/interfaces/auth.interface';
 import { User } from 'src/common/decorators/user.decorator';
+import { Public } from 'src/common/decorators/public.decorator';
 
 @Controller('restaurants')
 export class RestaurantController {
@@ -34,11 +35,13 @@ export class RestaurantController {
     });
   }
 
+  @Public()
   @Get()
   async findAll(): Promise<{ restaurants: Restaurant[] }> {
     return await this.restaurantService.findAll();
   }
 
+  @Public()
   @Get(':id')
   async findById(@Param('id') id: string): Promise<Restaurant | null> {
     return await this.restaurantService.findById(id);
