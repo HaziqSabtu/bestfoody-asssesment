@@ -16,6 +16,9 @@ import status from 'http-status';
 
 import { ParamParsePipe } from '../../../common/pipes/param-parse.pipe';
 
+import { AuthUser } from 'src/common/interfaces/auth.interface';
+import { User } from 'src/common/decorators/user.decorator';
+
 @Controller('restaurants/:restaurantId/reviews')
 export class ReviewController {
   constructor(private readonly reviewService: ReviewService) {}
@@ -24,10 +27,11 @@ export class ReviewController {
   async create(
     @Param('restaurantId') restaurantId: string,
     @Body() createReviewDto: CreateReviewDto,
+    @User() user: AuthUser,
   ): Promise<Review> {
     return await this.reviewService.create({
       ...createReviewDto,
-      userId: 'a4c1c840-3d36-4793-a0c3-82aa5c20b9cc',
+      userId: user.userId,
       restaurantId,
     });
   }
@@ -45,8 +49,14 @@ export class ReviewController {
     @Param('reviewId', ParamParsePipe) reviewId: string,
     @Body()
     updateReviewDto: UpdateReviewDto,
+    @User() user: AuthUser,
   ): Promise<Review> {
-    return await this.reviewService.update(reviewId, updateReviewDto);
+    return await this.reviewService.update({
+      ...updateReviewDto,
+      userId: user.userId,
+      restaurantId,
+      reviewId,
+    });
   }
 
   @Delete(':reviewId')
@@ -54,8 +64,13 @@ export class ReviewController {
   async delete(
     @Param('restaurantId', ParamParsePipe) restaurantId: string,
     @Param('reviewId', ParamParsePipe) reviewId: string,
+    @User() user: AuthUser,
   ): Promise<void> {
-    await this.reviewService.delete(reviewId);
+    await this.reviewService.delete({
+      userId: user.userId,
+      restaurantId,
+      reviewId,
+    });
     return;
   }
 }

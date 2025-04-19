@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { CreateReviewDto } from '../dtos/create-review.dto';
 import { UpdateReviewDto } from '../dtos/update-review.dto';
 import { Review } from '../entities/review.entity';
@@ -10,6 +14,18 @@ import { UserAlreadyReviewedException } from '../../../common/exceptions/user-re
 interface CreateInput extends CreateReviewDto {
   userId: string;
   restaurantId: string;
+}
+
+interface UpdateInput extends UpdateReviewDto {
+  userId: string;
+  restaurantId: string;
+  reviewId: string;
+}
+
+interface DeleteInput {
+  userId: string;
+  restaurantId: string;
+  reviewId: string;
 }
 
 @Injectable()
@@ -60,26 +76,40 @@ export class ReviewService {
     return { reviews };
   }
 
-  async update(id: string, data: UpdateReviewDto): Promise<Review> {
-    const review = await this.reviewRepository.findById(id);
+  async update(data: UpdateInput): Promise<Review> {
+    const { reviewId, restaurantId, userId } = data;
+    const review = await this.reviewRepository.findById(reviewId);
 
-    if (!review) {
-      throw new NotFoundException(`Review with id ${id} not found`);
+    if (!review || review.restaurantId !== restaurantId) {
+      throw new NotFoundException(`Review with id ${reviewId} not found`);
     }
 
-    const updatedReview = await this.reviewRepository.update(id, data);
+    if (review.userId !== userId) {
+      throw new UnauthorizedException(
+        'You are not authorized to update this review',
+      );
+    }
+
+    const updatedReview = await this.reviewRepository.update(reviewId, data);
 
     return updatedReview;
   }
 
-  async delete(id: string): Promise<{ id: Review['id'] }> {
-    const review = await this.reviewRepository.findById(id);
+  async delete(data: DeleteInput): Promise<{ id: Review['id'] }> {
+    const { reviewId, restaurantId, userId } = data;
+    const review = await this.reviewRepository.findById(reviewId);
 
-    if (!review) {
-      throw new NotFoundException(`Review with id ${id} not found`);
+    if (!review || review.restaurantId !== restaurantId) {
+      throw new NotFoundException(`Review with id ${reviewId} not found`);
     }
 
-    const deletedId = await this.reviewRepository.delete(id);
+    if (review.userId !== userId) {
+      throw new UnauthorizedException(
+        'You are not authorized to delete this review',
+      );
+    }
+
+    const deletedId = await this.reviewRepository.delete(reviewId);
     return deletedId;
   }
 }
