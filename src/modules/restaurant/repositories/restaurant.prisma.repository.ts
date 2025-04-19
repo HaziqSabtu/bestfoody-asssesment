@@ -19,12 +19,31 @@ export class RestaurantPrismaRepository implements RestaurantRepository {
     return new Restaurant({ ...created, rating });
   }
 
-  //   async findById(id: string): Promise<Restaurant | null> {
-  //     const Restaurant = await this.prisma.restaurant.findUnique({
-  //       where: { id },
-  //     });
-  //     return Restaurant ? new Restaurant(Restaurant) : null;
-  //   }
+  async findById(id: string): Promise<Restaurant | null> {
+    const data = await this.prisma.restaurant.findUnique({
+      where: { id },
+      include: {
+        rating: true,
+      },
+    });
+
+    if (!data) {
+      return null;
+    }
+
+    const rating = data.rating
+      ? new Rating({
+          rating: data.rating.averageRating,
+          count: data.rating.reviewCount,
+          lastUpdatedAt: data.rating.lastUpdated,
+        })
+      : new Rating({});
+
+    return new Restaurant({
+      ...data,
+      rating,
+    });
+  }
 
   async findAll(): Promise<Restaurant[]> {
     const Restaurants = await this.prisma.restaurant.findMany({
@@ -45,18 +64,26 @@ export class RestaurantPrismaRepository implements RestaurantRepository {
     });
   }
 
-  //   async update(id: string, data: UpdateRestaurantInput): Promise<Restaurant> {
-  //     const updated = await this.prisma.restaurant.update({
-  //       where: { id },
-  //       data,
-  //     });
-  //     return new Restaurant(updated); // Map to domain entity
-  //   }
+  async update(id: string, data: Restaurant): Promise<Restaurant> {
+    const updated = await this.prisma.restaurant.update({
+      where: { id },
+      data: {
+        name: data.name,
+        category: data.category,
+      },
+    });
+    const rating = new Rating({
+      rating: data.rating.rating,
+      count: data.rating.count,
+      lastUpdatedAt: data.rating.lastUpdatedAt,
+    });
+    return new Restaurant({ ...updated, rating });
+  }
 
-  //   async delete(id: string): Promise<string> {
-  //     const deleted = await this.prisma.restaurant.delete({
-  //       where: { id },
-  //     });
-  //     return deleted.id;
-  //   }
+  async delete(id: string): Promise<string> {
+    const deleted = await this.prisma.restaurant.delete({
+      where: { id },
+    });
+    return deleted.id;
+  }
 }

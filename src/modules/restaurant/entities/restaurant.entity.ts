@@ -50,4 +50,11 @@ export class Restaurant {
       throw new Error('Restaurant category is required');
     }
   }
+
+  update(data: Partial<Restaurant>) {
+    this.name = data.name ?? this.name;
+    this.category = data.category ?? this.category;
+
+    return this;
+  }
 }
