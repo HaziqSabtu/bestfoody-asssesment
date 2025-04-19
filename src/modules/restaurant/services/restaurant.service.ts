@@ -5,6 +5,7 @@ import {
 } from '@nestjs/common';
 import { CreateRestaurantDto } from '../dtos/create-restaurant.dto';
 import { UpdateRestaurantDto } from '../dtos/update-restaurant.dto';
+import { FindAllRestaurantDto } from '../dtos/find-restaurant.dto';
 import { Restaurant } from '../entities/restaurant.entity';
 import { RestaurantRepository } from '../repositories/restaurant.repository';
 
@@ -40,9 +41,18 @@ export class RestaurantService {
     return restaurant;
   }
 
-  async findAll(): Promise<{ restaurants: Restaurant[] }> {
-    const restaurants = await this.restaurantRepository.findAll();
-    return { restaurants };
+  async findAll(findAllInput: FindAllRestaurantDto): Promise<{
+    restaurants: Restaurant[];
+    nextCursor: string | null;
+  }> {
+    const { category, name, cursor, take } = findAllInput;
+    const restaurants = await this.restaurantRepository.findAll({
+      category,
+      name,
+      cursor,
+      take,
+    });
+    return restaurants;
   }
 
   async update(data: UpdateInput): Promise<Restaurant> {

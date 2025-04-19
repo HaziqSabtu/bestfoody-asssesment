@@ -3,10 +3,15 @@ import {
   RestaurantRepository,
   createInput,
   updateInput,
+  findAllInput,
 } from './restaurant.repository';
 import { PrismaService } from '../../shared/services/prisma.service';
-import { Restaurant } from '../entities/restaurant.entity';
+import {
+  Restaurant,
+  RestaurantCategoryType,
+} from '../entities/restaurant.entity';
 import { Rating } from '../entities/rating.entity';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class RestaurantPrismaRepository implements RestaurantRepository {
@@ -50,11 +55,28 @@ export class RestaurantPrismaRepository implements RestaurantRepository {
     });
   }
 
-  async findAll(): Promise<Restaurant[]> {
-    const Restaurants = await this.prisma.restaurant.findMany({
-      where: {
-        deletedAt: null,
-      },
+  async findAll(params?: findAllInput): Promise<{
+    restaurants: Restaurant[];
+    nextCursor: string | null;
+  }> {
+    const { category, name, cursor, take = 10 } = params || {};
+
+    const where: Prisma.RestaurantWhereInput = {
+      deletedAt: null,
+    };
+
+    if (category) {
+      where.category = category;
+    }
+
+    if (name) {
+      where.name = {
+        contains: name,
+      };
+    }
+
+    const restaurants = await this.prisma.restaurant.findMany({
+      where: where,
       include: {
         rating: true,
       },
@@ -63,18 +85,30 @@ export class RestaurantPrismaRepository implements RestaurantRepository {
           averageRating: 'desc',
         },
       },
+      cursor: cursor ? { id: cursor } : undefined,
+      skip: cursor ? 1 : 0,
+      take,
     });
-    return Restaurants.map((r) => {
-      if (r.rating) {
-        const rating = new Rating({
-          rating: r.rating.averageRating,
-          count: r.rating.reviewCount,
-          lastUpdatedAt: r.rating.lastUpdated,
-        });
-        return new Restaurant({ ...r, rating });
-      }
-      return new Restaurant({ ...r, rating: new Rating({}) });
+
+    const mapped = restaurants.map((r) => {
+      const rating = r.rating
+        ? new Rating({
+            rating: r.rating.averageRating,
+            count: r.rating.reviewCount,
+            lastUpdatedAt: r.rating.lastUpdated,
+          })
+        : new Rating({});
+
+      return new Restaurant({ ...r, rating });
     });
+
+    return {
+      restaurants: mapped,
+      nextCursor:
+        restaurants.length === take
+          ? restaurants[restaurants.length - 1].id
+          : null,
+    };
   }
 
   async update(id: string, data: updateInput): Promise<Restaurant> {

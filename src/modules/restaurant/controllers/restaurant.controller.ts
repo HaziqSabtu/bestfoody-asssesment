@@ -7,10 +7,12 @@ import {
   Param,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
 import { RestaurantService } from '../services/restaurant.service';
 import { CreateRestaurantDto } from '../dtos/create-restaurant.dto';
 import { UpdateRestaurantDto } from '../dtos/update-restaurant.dto';
+import { FindAllRestaurantDto } from '../dtos/find-restaurant.dto';
 import { Restaurant } from '../entities/restaurant.entity';
 import status from 'http-status';
 
@@ -37,8 +39,11 @@ export class RestaurantController {
 
   @Public()
   @Get()
-  async findAll(): Promise<{ restaurants: Restaurant[] }> {
-    return await this.restaurantService.findAll();
+  async findAll(@Query() findAllRestaurantDto: FindAllRestaurantDto): Promise<{
+    restaurants: Restaurant[];
+    nextCursor: string | null;
+  }> {
+    return await this.restaurantService.findAll(findAllRestaurantDto);
   }
 
   @Public()
