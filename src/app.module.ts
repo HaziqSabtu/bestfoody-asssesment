@@ -4,9 +4,18 @@ import { AppService } from './app.service';
 import { SharedModule } from './modules/shared/shared.module';
 import { RestaurantModule } from './modules/restaurant/restaurant.module';
 
+import { ZodValidationPipe } from 'nestjs-zod';
+import { APP_PIPE } from '@nestjs/core';
+
 @Module({
   imports: [SharedModule, RestaurantModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_PIPE,
+      useClass: ZodValidationPipe,
+    },
+  ],
 })
 export class AppModule {}

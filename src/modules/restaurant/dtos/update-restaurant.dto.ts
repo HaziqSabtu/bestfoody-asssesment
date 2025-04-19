@@ -1,7 +1,8 @@
 import { z } from 'zod';
 import { RestaurantCategoryEnum } from '../entities/restaurant.entity';
+import { createZodDto } from 'nestjs-zod';
 
-export const updateRestaurantSchema = z
+const updateRestaurantSchema = z
   .object({
     name: z.string().optional(),
     category: z.nativeEnum(RestaurantCategoryEnum).optional(),
@@ -10,4 +11,4 @@ export const updateRestaurantSchema = z
     message: 'Either name or category must be provided',
   });
 
-export type UpdateRestaurantDto = z.infer<typeof updateRestaurantSchema>;
+export class UpdateRestaurantDto extends createZodDto(updateRestaurantSchema) {}

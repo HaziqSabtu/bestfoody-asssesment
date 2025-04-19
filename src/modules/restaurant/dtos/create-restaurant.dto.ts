@@ -1,9 +1,10 @@
 import { z } from 'zod';
 import { RestaurantCategoryEnum } from '../entities/restaurant.entity';
+import { createZodDto } from 'nestjs-zod';
 
-export const createRestaurantSchema = z.object({
+const createRestaurantSchema = z.object({
   name: z.string(),
   category: z.nativeEnum(RestaurantCategoryEnum),
 });
 
-export type CreateRestaurantDto = z.infer<typeof createRestaurantSchema>;
+export class CreateRestaurantDto extends createZodDto(createRestaurantSchema) {}

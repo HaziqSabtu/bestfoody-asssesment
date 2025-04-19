@@ -6,30 +6,17 @@ import {
   Param,
   Post,
   Put,
-  UsePipes,
 } from '@nestjs/common';
 import { RestaurantService } from '../services/restaurant.service';
-import { PrismaService } from '../../shared/services/prisma.service';
-import {
-  CreateRestaurantDto,
-  createRestaurantSchema,
-} from '../dtos/create-restaurant.dto';
-import {
-  UpdateRestaurantDto,
-  updateRestaurantSchema,
-} from '../dtos/update-restaurant.dto';
-import { ZodValidationPipe } from 'src/common/pipes/validation.pipe';
+import { CreateRestaurantDto } from '../dtos/create-restaurant.dto';
+import { UpdateRestaurantDto } from '../dtos/update-restaurant.dto';
 import { Restaurant } from '../entities/restaurant.entity';
 
 @Controller('restaurants')
 export class RestaurantController {
-  constructor(
-    private readonly restaurantService: RestaurantService,
-    private readonly prisma: PrismaService,
-  ) {}
+  constructor(private readonly restaurantService: RestaurantService) {}
 
   @Post()
-  @UsePipes(new ZodValidationPipe(createRestaurantSchema))
   async create(
     @Body() createRestaurantDto: CreateRestaurantDto,
   ): Promise<Restaurant> {
@@ -49,7 +36,7 @@ export class RestaurantController {
   @Put(':id')
   async update(
     @Param('id') id: string,
-    @Body(new ZodValidationPipe(updateRestaurantSchema))
+    @Body()
     updateRestaurantDto: UpdateRestaurantDto,
   ): Promise<Restaurant> {
     return await this.restaurantService.update(id, updateRestaurantDto);
