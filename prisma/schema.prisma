@@ -54,8 +54,6 @@ model Review {
 
   restaurant Restaurant @relation(fields: [restaurantId], references: [id])
   user       User       @relation(fields: [userId], references: [id])
-
-  @@unique([userId, restaurantId])
 }
 
 model RestaurantImage {
