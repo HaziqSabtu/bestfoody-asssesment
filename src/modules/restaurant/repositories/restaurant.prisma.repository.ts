@@ -58,6 +58,11 @@ export class RestaurantPrismaRepository implements RestaurantRepository {
       include: {
         rating: true,
       },
+      orderBy: {
+        rating: {
+          averageRating: 'desc',
+        },
+      },
     });
     return Restaurants.map((r) => {
       if (r.rating) {
