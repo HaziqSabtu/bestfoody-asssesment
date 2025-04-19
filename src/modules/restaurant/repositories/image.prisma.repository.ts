@@ -21,9 +21,12 @@ export class ImagePrismaRepository implements ImageRepository {
     });
   }
 
-  async findById(imageId: string): Promise<Image | null> {
+  async findByIdAndUserId(
+    imageId: string,
+    userId: string,
+  ): Promise<Image | null> {
     const data = await this.prisma.restaurantImage.findUnique({
-      where: { id: imageId },
+      where: { id: imageId, userId },
     });
 
     if (!data) {

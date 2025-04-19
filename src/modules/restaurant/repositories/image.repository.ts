@@ -7,5 +7,8 @@ export type createInput = {
 
 export abstract class ImageRepository {
   abstract create(Image: createInput): Promise<Image>;
-  abstract findById(imageId: string): Promise<Image | null>;
+  abstract findByIdAndUserId(
+    imageId: string,
+    userId: string,
+  ): Promise<Image | null>;
 }

@@ -21,10 +21,23 @@ export class RestaurantPrismaRepository implements RestaurantRepository {
         name: restaurant.name,
         category: restaurant.category,
         userId: restaurant.userId,
+        imageId: restaurant.imageId,
+      },
+      include: {
+        image: true,
       },
     });
     const rating = new Rating({});
-    return new Restaurant({ ...created, rating, image: null });
+    const image = created.image
+      ? new Image({
+          imageId: created.image.id,
+          url: created.image.url,
+          uploadedAt: created.image.uploadedAt,
+          userId: created.image.userId,
+        })
+      : null;
+
+    return new Restaurant({ ...created, rating, image });
   }
 
   async findById(id: string): Promise<Restaurant | null> {
@@ -136,6 +149,7 @@ export class RestaurantPrismaRepository implements RestaurantRepository {
       data: {
         name: data.name,
         category: data.category,
+        imageId: data.imageId,
       },
       include: {
         rating: true,

@@ -8,6 +8,7 @@ import { UpdateRestaurantDto } from '../dtos/update-restaurant.dto';
 import { FindAllRestaurantDto } from '../dtos/find-restaurant.dto';
 import { Restaurant } from '../entities/restaurant.entity';
 import { RestaurantRepository } from '../repositories/restaurant.repository';
+import { ImageRepository } from '../repositories/image.repository';
 
 interface CreateInput extends CreateRestaurantDto {
   userId: string;
@@ -25,9 +26,23 @@ interface DeleteInput {
 
 @Injectable()
 export class RestaurantService {
-  constructor(private readonly restaurantRepository: RestaurantRepository) {}
+  constructor(
+    private readonly restaurantRepository: RestaurantRepository,
+    private readonly imageRepository: ImageRepository,
+  ) {}
 
   async create(data: CreateInput): Promise<Restaurant> {
+    if (data.imageId) {
+      const image = await this.imageRepository.findByIdAndUserId(
+        data.imageId,
+        data.userId,
+      );
+
+      if (!image) {
+        throw new NotFoundException(`Image with id ${data.imageId} not found`);
+      }
+    }
+
     const restaurant = await this.restaurantRepository.create(data);
     return restaurant;
   }
@@ -69,6 +84,16 @@ export class RestaurantService {
       throw new UnauthorizedException(
         'You are not authorized to update this restaurant',
       );
+    }
+
+    if (data.imageId && restaurant.image?.imageId !== data.imageId) {
+      const image = await this.imageRepository.findByIdAndUserId(
+        data.imageId,
+        data.userId,
+      );
+      if (!image) {
+        throw new NotFoundException(`Image with id ${data.imageId} not found`);
+      }
     }
 
     const updatedRestaurant = await this.restaurantRepository.update(

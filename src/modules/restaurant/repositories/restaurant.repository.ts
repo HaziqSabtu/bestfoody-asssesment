@@ -2,11 +2,13 @@ import {
   Restaurant,
   RestaurantCategoryType,
 } from '../entities/restaurant.entity';
+import { Image } from '../entities/image.entity';
 
 export type createInput = {
   name: Restaurant['name'];
   category: Restaurant['category'];
   userId: Restaurant['userId'];
+  imageId?: Image['imageId'];
 };
 
 export type findAllInput = {
@@ -16,7 +18,11 @@ export type findAllInput = {
   take?: number;
 };
 
-export type updateInput = Partial<Pick<Restaurant, 'name' | 'category'>>;
+export type updateInput = Partial<
+  Pick<Restaurant, 'name' | 'category'> & {
+    imageId?: Image['imageId'];
+  }
+>;
 
 export abstract class RestaurantRepository {
   abstract create(restaurant: createInput): Promise<Restaurant>;

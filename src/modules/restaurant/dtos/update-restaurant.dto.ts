@@ -6,9 +6,11 @@ const updateRestaurantSchema = z
   .object({
     name: z.string().optional(),
     category: z.nativeEnum(RestaurantCategoryEnum).optional(),
+    imageId: z.string().optional(),
   })
-  .refine((data) => data.name || data.category, {
-    message: 'Either name or category must be provided',
+  .refine((data) => data.name || data.category || data.imageId, {
+    message: 'Either name, category or imageId must be provided',
+    path: ['name', 'category', 'imageId'],
   });
 
 export class UpdateRestaurantDto extends createZodDto(updateRestaurantSchema) {}
