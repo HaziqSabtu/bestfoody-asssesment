@@ -14,6 +14,8 @@ import { UpdateRestaurantDto } from '../dtos/update-restaurant.dto';
 import { Restaurant } from '../entities/restaurant.entity';
 import status from 'http-status';
 
+import { ParamParsePipe } from '../../../common/pipes/param-parse.pipe';
+
 import { AuthUser } from 'src/common/interfaces/auth.interface';
 import { User } from 'src/common/decorators/user.decorator';
 
@@ -26,7 +28,10 @@ export class RestaurantController {
     @Body() createRestaurantDto: CreateRestaurantDto,
     @User() user: AuthUser,
   ): Promise<Restaurant> {
-    return await this.restaurantService.create(createRestaurantDto, user);
+    return await this.restaurantService.create({
+      ...createRestaurantDto,
+      userId: user.userId,
+    });
   }
 
   @Get()
@@ -39,20 +44,30 @@ export class RestaurantController {
     return await this.restaurantService.findById(id);
   }
 
-  @Put(':id')
+  @Put(':restaurantId')
   async update(
-    @Param('id') id: string,
+    @Param('restaurantId', ParamParsePipe) restaurantId: string,
     @Body()
     updateRestaurantDto: UpdateRestaurantDto,
     @User() user: AuthUser,
   ): Promise<Restaurant> {
-    return await this.restaurantService.update(id, updateRestaurantDto, user);
+    return await this.restaurantService.update({
+      ...updateRestaurantDto,
+      userId: user.userId,
+      restaurantId: restaurantId,
+    });
   }
 
-  @Delete(':id')
+  @Delete(':restaurantId')
   @HttpCode(status.NO_CONTENT)
-  async delete(@Param('id') id: string, @User() user: AuthUser): Promise<void> {
-    await this.restaurantService.delete(id, user);
+  async delete(
+    @Param('restaurantId', ParamParsePipe) restaurantId: string,
+  ): Promise<void> {
+    await this.restaurantService.delete({
+      restaurantId,
+      userId: 'a4c1c840-3d36-4793-a0c3-82aa5c20b9cc',
+    });
+
     return;
   }
 }

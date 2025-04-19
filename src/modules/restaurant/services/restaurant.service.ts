@@ -7,20 +7,27 @@ import { CreateRestaurantDto } from '../dtos/create-restaurant.dto';
 import { UpdateRestaurantDto } from '../dtos/update-restaurant.dto';
 import { Restaurant } from '../entities/restaurant.entity';
 import { RestaurantRepository } from '../repositories/restaurant.repository';
-import { AuthUser } from 'src/common/interfaces/auth.interface';
+
+interface CreateInput extends CreateRestaurantDto {
+  userId: string;
+}
+
+interface UpdateInput extends UpdateRestaurantDto {
+  userId: string;
+  restaurantId: string;
+}
+
+interface DeleteInput {
+  userId: string;
+  restaurantId: string;
+}
 
 @Injectable()
 export class RestaurantService {
   constructor(private readonly restaurantRepository: RestaurantRepository) {}
 
-  async create(
-    createRestaurantDto: CreateRestaurantDto,
-    user: AuthUser,
-  ): Promise<Restaurant> {
-    const restaurant = await this.restaurantRepository.create({
-      ...createRestaurantDto,
-      userId: user.userId,
-    });
+  async create(data: CreateInput): Promise<Restaurant> {
+    const restaurant = await this.restaurantRepository.create(data);
     return restaurant;
   }
 
@@ -38,45 +45,47 @@ export class RestaurantService {
     return { restaurants };
   }
 
-  async update(
-    id: string,
-    data: UpdateRestaurantDto,
-    user: AuthUser,
-  ): Promise<Restaurant> {
-    const restaurant = await this.restaurantRepository.findById(id);
+  async update(data: UpdateInput): Promise<Restaurant> {
+    const { restaurantId } = data;
+    const restaurant = await this.restaurantRepository.findById(restaurantId);
 
     if (!restaurant) {
-      throw new NotFoundException(`Restaurant with id ${id} not found`);
+      throw new NotFoundException(
+        `Restaurant with id ${restaurantId} not found`,
+      );
     }
 
-    if (restaurant.userId !== user.userId) {
+    if (restaurant.userId !== data.userId) {
       throw new UnauthorizedException(
         'You are not authorized to update this restaurant',
       );
     }
 
     const updatedRestaurant = await this.restaurantRepository.update(
-      id,
-      restaurant.update(data),
+      restaurantId,
+      data,
     );
 
     return updatedRestaurant;
   }
 
-  async delete(id: string, user: AuthUser): Promise<{ id: Restaurant['id'] }> {
-    const restaurant = await this.restaurantRepository.findById(id);
+  async delete(data: DeleteInput): Promise<{ id: Restaurant['id'] }> {
+    const { restaurantId } = data;
+    const restaurant = await this.restaurantRepository.findById(restaurantId);
 
     if (!restaurant) {
-      throw new NotFoundException(`Restaurant with id ${id} not found`);
+      throw new NotFoundException(
+        `Restaurant with id ${restaurantId} not found`,
+      );
     }
 
-    if (restaurant.userId !== user.userId) {
+    if (restaurant.userId !== data.userId) {
       throw new UnauthorizedException(
         'You are not authorized to delete this restaurant',
       );
     }
 
-    const deletedId = await this.restaurantRepository.delete(id);
+    const deletedId = await this.restaurantRepository.delete(restaurantId);
     return deletedId;
   }
 }

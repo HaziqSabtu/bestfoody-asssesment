@@ -1,5 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { RestaurantRepository, createInput } from './restaurant.repository';
+import {
+  RestaurantRepository,
+  createInput,
+  updateInput,
+} from './restaurant.repository';
 import { PrismaService } from '../../shared/services/prisma.service';
 import { Restaurant } from '../entities/restaurant.entity';
 import { Rating } from '../entities/rating.entity';
@@ -68,19 +72,25 @@ export class RestaurantPrismaRepository implements RestaurantRepository {
     });
   }
 
-  async update(id: string, data: Restaurant): Promise<Restaurant> {
+  async update(id: string, data: updateInput): Promise<Restaurant> {
     const updated = await this.prisma.restaurant.update({
       where: { id },
       data: {
         name: data.name,
         category: data.category,
       },
+      include: {
+        rating: true,
+      },
     });
-    const rating = new Rating({
-      rating: data.rating.rating,
-      count: data.rating.count,
-      lastUpdatedAt: data.rating.lastUpdatedAt,
-    });
+
+    const rating = updated.rating
+      ? new Rating({
+          rating: updated.rating.averageRating,
+          count: updated.rating.reviewCount,
+          lastUpdatedAt: updated.rating.lastUpdated,
+        })
+      : new Rating({});
     return new Restaurant({ ...updated, rating });
   }
 
