@@ -14,6 +14,9 @@ import { UpdateRestaurantDto } from '../dtos/update-restaurant.dto';
 import { Restaurant } from '../entities/restaurant.entity';
 import status from 'http-status';
 
+import { AuthUser } from 'src/common/interfaces/auth.interface';
+import { User } from 'src/common/decorators/user.decorator';
+
 @Controller('restaurants')
 export class RestaurantController {
   constructor(private readonly restaurantService: RestaurantService) {}
@@ -21,8 +24,9 @@ export class RestaurantController {
   @Post()
   async create(
     @Body() createRestaurantDto: CreateRestaurantDto,
+    @User() user: AuthUser,
   ): Promise<Restaurant> {
-    return await this.restaurantService.create(createRestaurantDto);
+    return await this.restaurantService.create(createRestaurantDto, user);
   }
 
   @Get()
@@ -40,14 +44,15 @@ export class RestaurantController {
     @Param('id') id: string,
     @Body()
     updateRestaurantDto: UpdateRestaurantDto,
+    @User() user: AuthUser,
   ): Promise<Restaurant> {
-    return await this.restaurantService.update(id, updateRestaurantDto);
+    return await this.restaurantService.update(id, updateRestaurantDto, user);
   }
 
   @Delete(':id')
   @HttpCode(status.NO_CONTENT)
-  async delete(@Param('id') id: string): Promise<void> {
-    await this.restaurantService.delete(id);
+  async delete(@Param('id') id: string, @User() user: AuthUser): Promise<void> {
+    await this.restaurantService.delete(id, user);
     return;
   }
 }

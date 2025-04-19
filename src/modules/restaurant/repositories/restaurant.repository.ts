@@ -3,6 +3,7 @@ import { Restaurant } from '../entities/restaurant.entity';
 export type createInput = {
   name: Restaurant['name'];
   category: Restaurant['category'];
+  userId: Restaurant['userId'];
 };
 
 export abstract class RestaurantRepository {

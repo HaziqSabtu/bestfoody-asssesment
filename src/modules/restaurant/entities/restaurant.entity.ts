@@ -16,6 +16,7 @@ export class Restaurant {
   public category: RestaurantCategoryType;
   public imageUrl?: string;
   public rating: Rating;
+  public userId: string;
 
   constructor({
     id,
@@ -23,18 +24,21 @@ export class Restaurant {
     category,
     imageUrl,
     rating,
+    userId,
   }: {
     id: string;
     name: string;
     category: RestaurantCategoryType;
     imageUrl?: string;
     rating: Rating;
+    userId: string;
   }) {
     this.id = id;
     this.name = name;
     this.category = category;
     this.imageUrl = imageUrl;
     this.rating = rating;
+    this.userId = userId;
 
     this.validate();
   }
@@ -48,6 +52,9 @@ export class Restaurant {
     }
     if (!this.category) {
       throw new Error('Restaurant category is required');
+    }
+    if (!this.userId) {
+      throw new Error('Restaurant userId is required');
     }
   }
 

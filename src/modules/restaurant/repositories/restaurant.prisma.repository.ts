@@ -13,6 +13,7 @@ export class RestaurantPrismaRepository implements RestaurantRepository {
       data: {
         name: restaurant.name,
         category: restaurant.category,
+        userId: restaurant.userId,
       },
     });
     const rating = new Rating({});
