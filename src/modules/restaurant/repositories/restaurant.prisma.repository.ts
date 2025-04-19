@@ -2,14 +2,21 @@ import { Injectable } from '@nestjs/common';
 import { RestaurantRepository, createInput } from './restaurant.repository';
 import { PrismaService } from '../../shared/services/prisma.service';
 import { Restaurant } from '../entities/restaurant.entity';
+import { Rating } from '../entities/rating.entity';
 
 @Injectable()
 export class RestaurantPrismaRepository implements RestaurantRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(restaurant: createInput): Promise<Restaurant> {
-    const created = await this.prisma.restaurant.create({ data: restaurant });
-    return new Restaurant(created);
+    const created = await this.prisma.restaurant.create({
+      data: {
+        name: restaurant.name,
+        category: restaurant.category,
+      },
+    });
+    const rating = new Rating({});
+    return new Restaurant({ ...created, rating });
   }
 
   //   async findById(id: string): Promise<Restaurant | null> {
@@ -20,8 +27,22 @@ export class RestaurantPrismaRepository implements RestaurantRepository {
   //   }
 
   async findAll(): Promise<Restaurant[]> {
-    const Restaurants = await this.prisma.restaurant.findMany();
-    return Restaurants.map((r) => new Restaurant(r));
+    const Restaurants = await this.prisma.restaurant.findMany({
+      include: {
+        rating: true,
+      },
+    });
+    return Restaurants.map((r) => {
+      if (r.rating) {
+        const rating = new Rating({
+          rating: r.rating.averageRating,
+          count: r.rating.reviewCount,
+          lastUpdatedAt: r.rating.lastUpdated,
+        });
+        return new Restaurant({ ...r, rating });
+      }
+      return new Restaurant({ ...r, rating: new Rating({}) });
+    });
   }
 
   //   async update(id: string, data: UpdateRestaurantInput): Promise<Restaurant> {

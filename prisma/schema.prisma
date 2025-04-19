@@ -28,17 +28,18 @@ model Restaurant {
   updatedAt DateTime           @updatedAt
   deletedAt DateTime?
 
-  image            RestaurantImage?   @relation(fields: [imageId], references: [id])
-  reviews          Review[]
-  RestaurantRating RestaurantRating[]
+  image   RestaurantImage?  @relation(fields: [imageId], references: [id])
+  reviews Review[]
+  rating  RestaurantRating?
 }
 
-enum RestaurantCategory {
-  MALAYSIAN
-  INDIAN
-  CHINESE
-  JAPANESE
-  ITALIAN
+model RestaurantRating {
+  restaurantId  String   @id
+  averageRating Float    @default(0)
+  reviewCount   Int      @default(0)
+  lastUpdated   DateTime @default(now())
+
+  Restaurant Restaurant @relation(fields: [restaurantId], references: [id])
 }
 
 model Review {
@@ -57,15 +58,6 @@ model Review {
   @@unique([userId, restaurantId])
 }
 
-model RestaurantRating {
-  restaurantId  String   @id @default(uuid())
-  averageRating Float    @default(0)
-  reviewCount   Int      @default(0)
-  lastUpdated   DateTime @default(now())
-
-  restaurant Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
-}
-
 model RestaurantImage {
   id         String   @id @default(uuid())
   url        String
@@ -74,4 +66,12 @@ model RestaurantImage {
 
   user       User        @relation(fields: [userId], references: [id])
   Restaurant Restaurant?
+}
+
+enum RestaurantCategory {
+  MALAYSIAN
+  INDIAN
+  CHINESE
+  JAPANESE
+  ITALIAN
 }
