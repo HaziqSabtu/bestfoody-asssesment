@@ -6,11 +6,9 @@ import {
   findAllInput,
 } from './restaurant.repository';
 import { PrismaService } from '../../shared/services/prisma.service';
-import {
-  Restaurant,
-  RestaurantCategoryType,
-} from '../entities/restaurant.entity';
+import { Restaurant } from '../entities/restaurant.entity';
 import { Rating } from '../entities/rating.entity';
+import { Image } from '../entities/image.entity';
 import { Prisma } from '@prisma/client';
 
 @Injectable()
@@ -26,7 +24,7 @@ export class RestaurantPrismaRepository implements RestaurantRepository {
       },
     });
     const rating = new Rating({});
-    return new Restaurant({ ...created, rating });
+    return new Restaurant({ ...created, rating, image: null });
   }
 
   async findById(id: string): Promise<Restaurant | null> {
@@ -34,6 +32,7 @@ export class RestaurantPrismaRepository implements RestaurantRepository {
       where: { id, deletedAt: null },
       include: {
         rating: true,
+        image: true,
       },
     });
 
@@ -49,9 +48,18 @@ export class RestaurantPrismaRepository implements RestaurantRepository {
         })
       : new Rating({});
 
+    const image = data.image
+      ? new Image({
+          imageId: data.image.id,
+          url: data.image.url,
+          uploadedAt: data.image.uploadedAt,
+        })
+      : null;
+
     return new Restaurant({
       ...data,
       rating,
+      image,
     });
   }
 
@@ -79,6 +87,7 @@ export class RestaurantPrismaRepository implements RestaurantRepository {
       where: where,
       include: {
         rating: true,
+        image: true,
       },
       orderBy: {
         rating: {
@@ -99,7 +108,15 @@ export class RestaurantPrismaRepository implements RestaurantRepository {
           })
         : new Rating({});
 
-      return new Restaurant({ ...r, rating });
+      const image = r.image
+        ? new Image({
+            imageId: r.image.id,
+            url: r.image.url,
+            uploadedAt: r.image.uploadedAt,
+          })
+        : null;
+
+      return new Restaurant({ ...r, rating, image });
     });
 
     return {
@@ -120,6 +137,7 @@ export class RestaurantPrismaRepository implements RestaurantRepository {
       },
       include: {
         rating: true,
+        image: true,
       },
     });
 
@@ -130,7 +148,15 @@ export class RestaurantPrismaRepository implements RestaurantRepository {
           lastUpdatedAt: updated.rating.lastUpdated,
         })
       : new Rating({});
-    return new Restaurant({ ...updated, rating });
+
+    const image = updated.image
+      ? new Image({
+          imageId: updated.image.id,
+          url: updated.image.url,
+          uploadedAt: updated.image.uploadedAt,
+        })
+      : null;
+    return new Restaurant({ ...updated, rating, image: image });
   }
 
   async delete(id: string): Promise<{ id: Restaurant['id'] }> {

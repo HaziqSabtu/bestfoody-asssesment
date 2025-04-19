@@ -1,4 +1,5 @@
 import { Rating } from './rating.entity';
+import { Image } from './image.entity';
 
 export enum RestaurantCategoryEnum {
   MALAYSIAN = 'MALAYSIAN',
@@ -16,6 +17,7 @@ export class Restaurant {
   public category: RestaurantCategoryType;
   public imageUrl?: string;
   public rating: Rating;
+  public image: Image | null;
   public userId: string;
 
   constructor({
@@ -24,6 +26,7 @@ export class Restaurant {
     category,
     imageUrl,
     rating,
+    image,
     userId,
   }: {
     id: string;
@@ -32,6 +35,7 @@ export class Restaurant {
     imageUrl?: string;
     rating: Rating;
     userId: string;
+    image: Image | null;
   }) {
     this.id = id;
     this.name = name;
@@ -39,6 +43,7 @@ export class Restaurant {
     this.imageUrl = imageUrl;
     this.rating = rating;
     this.userId = userId;
+    this.image = image;
 
     this.validate();
   }
