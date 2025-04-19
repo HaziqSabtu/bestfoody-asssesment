@@ -10,6 +10,7 @@ import { ReviewRepository } from '../repositories/review.repository';
 import { RestaurantRepository } from '../repositories/restaurant.repository';
 
 import { UserAlreadyReviewedException } from '../../../common/exceptions/user-reviewed.exception';
+import { RatingService } from './rating.service';
 
 interface CreateInput extends CreateReviewDto {
   userId: string;
@@ -33,6 +34,7 @@ export class ReviewService {
   constructor(
     private readonly reviewRepository: ReviewRepository,
     private readonly restaurantRepository: RestaurantRepository,
+    private readonly ratingService: RatingService,
   ) {}
 
   async create(createInput: CreateInput): Promise<Review> {
@@ -57,6 +59,9 @@ export class ReviewService {
     }
 
     const review = await this.reviewRepository.create(createInput);
+
+    await this.ratingService.computeRating(createInput.restaurantId);
+
     return review;
   }
 
@@ -92,6 +97,8 @@ export class ReviewService {
 
     const updatedReview = await this.reviewRepository.update(reviewId, data);
 
+    await this.ratingService.computeRating(restaurantId);
+
     return updatedReview;
   }
 
@@ -110,6 +117,9 @@ export class ReviewService {
     }
 
     const deletedId = await this.reviewRepository.delete(reviewId);
+
+    await this.ratingService.computeRating(restaurantId);
+
     return deletedId;
   }
 }

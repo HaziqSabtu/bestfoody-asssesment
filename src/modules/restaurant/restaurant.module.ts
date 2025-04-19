@@ -14,6 +14,10 @@ import { ImageService } from './services/image.service';
 import { ImageRepository } from './repositories/image.repository';
 import { ImagePrismaRepository } from './repositories/image.prisma.repository';
 
+import { RatingService } from './services/rating.service';
+import { RatingRepository } from './repositories/rating.repository';
+import { RatingPrismaRepository } from './repositories/rating.prisma.repository';
+
 @Module({
   controllers: [RestaurantController, ReviewController, ImageController],
   providers: [
@@ -31,6 +35,11 @@ import { ImagePrismaRepository } from './repositories/image.prisma.repository';
     {
       provide: ImageRepository,
       useClass: ImagePrismaRepository,
+    },
+    RatingService,
+    {
+      provide: RatingRepository,
+      useClass: RatingPrismaRepository,
     },
   ],
 })
