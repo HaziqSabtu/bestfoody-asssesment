@@ -34,6 +34,7 @@ async function main() {
     data: {
       name: 'Pizza Palace',
       category: 'ITALIAN',
+      userId: alice.id,
     },
   });
 
@@ -41,6 +42,7 @@ async function main() {
     data: {
       name: 'Sushi Central',
       category: 'JAPANESE',
+      userId: bob.id,
     },
   });
 
