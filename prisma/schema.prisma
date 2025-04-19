@@ -1,0 +1,77 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        String    @id @default(uuid())
+  email     String    @unique
+  name      String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  reviews Review[]
+  uploads RestaurantImage[]
+}
+
+model Restaurant {
+  id        String             @id @default(uuid())
+  name      String
+  category  RestaurantCategory
+  imageId   String?            @unique
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+  deletedAt DateTime?
+
+  image            RestaurantImage?   @relation(fields: [imageId], references: [id])
+  reviews          Review[]
+  RestaurantRating RestaurantRating[]
+}
+
+enum RestaurantCategory {
+  MALAYSIAN
+  INDIAN
+  CHINESE
+  JAPANESE
+  ITALIAN
+}
+
+model Review {
+  id           String    @id @default(uuid())
+  restaurantId String
+  userId       String
+  rating       Int
+  reviewText   String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  deletedAt    DateTime?
+
+  restaurant Restaurant @relation(fields: [restaurantId], references: [id])
+  user       User       @relation(fields: [userId], references: [id])
+
+  @@unique([userId, restaurantId])
+}
+
+model RestaurantRating {
+  restaurantId  String   @id @default(uuid())
+  averageRating Float    @default(0)
+  reviewCount   Int      @default(0)
+  lastUpdated   DateTime @default(now())
+
+  restaurant Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+}
+
+model RestaurantImage {
+  id         String   @id @default(uuid())
+  url        String
+  uploadedAt DateTime @default(now())
+  userId     String
+
+  user       User        @relation(fields: [userId], references: [id])
+  Restaurant Restaurant?
+}
