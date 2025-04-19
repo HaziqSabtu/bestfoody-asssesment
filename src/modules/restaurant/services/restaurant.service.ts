@@ -23,9 +23,9 @@ export class RestaurantService {
     return restaurant;
   }
 
-  async findAll(): Promise<Restaurant[]> {
+  async findAll(): Promise<{ restaurants: Restaurant[] }> {
     const restaurants = await this.restaurantRepository.findAll();
-    return restaurants;
+    return { restaurants };
   }
 
   async update(id: string, data: UpdateRestaurantDto): Promise<Restaurant> {
@@ -43,7 +43,13 @@ export class RestaurantService {
     return updatedRestaurant;
   }
 
-  async delete(id: string): Promise<string> {
+  async delete(id: string): Promise<{ id: Restaurant['id'] }> {
+    const restaurant = await this.restaurantRepository.findById(id);
+
+    if (!restaurant) {
+      throw new NotFoundException(`Restaurant with id ${id} not found`);
+    }
+
     const deletedId = await this.restaurantRepository.delete(id);
     return deletedId;
   }

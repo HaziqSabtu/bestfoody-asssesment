@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
   Param,
   Post,
   Put,
@@ -11,6 +12,7 @@ import { RestaurantService } from '../services/restaurant.service';
 import { CreateRestaurantDto } from '../dtos/create-restaurant.dto';
 import { UpdateRestaurantDto } from '../dtos/update-restaurant.dto';
 import { Restaurant } from '../entities/restaurant.entity';
+import status from 'http-status';
 
 @Controller('restaurants')
 export class RestaurantController {
@@ -24,7 +26,7 @@ export class RestaurantController {
   }
 
   @Get()
-  async findAll(): Promise<Restaurant[]> {
+  async findAll(): Promise<{ restaurants: Restaurant[] }> {
     return await this.restaurantService.findAll();
   }
 
@@ -43,7 +45,9 @@ export class RestaurantController {
   }
 
   @Delete(':id')
-  async delete(@Param('id') id: string): Promise<string> {
-    return await this.restaurantService.delete(id);
+  @HttpCode(status.NO_CONTENT)
+  async delete(@Param('id') id: string): Promise<void> {
+    await this.restaurantService.delete(id);
+    return;
   }
 }

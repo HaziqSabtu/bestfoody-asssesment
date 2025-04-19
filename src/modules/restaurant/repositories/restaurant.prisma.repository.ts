@@ -21,7 +21,7 @@ export class RestaurantPrismaRepository implements RestaurantRepository {
 
   async findById(id: string): Promise<Restaurant | null> {
     const data = await this.prisma.restaurant.findUnique({
-      where: { id },
+      where: { id, deletedAt: null },
       include: {
         rating: true,
       },
@@ -47,6 +47,9 @@ export class RestaurantPrismaRepository implements RestaurantRepository {
 
   async findAll(): Promise<Restaurant[]> {
     const Restaurants = await this.prisma.restaurant.findMany({
+      where: {
+        deletedAt: null,
+      },
       include: {
         rating: true,
       },
@@ -80,10 +83,17 @@ export class RestaurantPrismaRepository implements RestaurantRepository {
     return new Restaurant({ ...updated, rating });
   }
 
-  async delete(id: string): Promise<string> {
-    const deleted = await this.prisma.restaurant.delete({
+  async delete(id: string): Promise<{ id: Restaurant['id'] }> {
+    const currentTime = new Date();
+    const deleted = await this.prisma.restaurant.update({
       where: { id },
+      data: {
+        deletedAt: currentTime,
+      },
     });
-    return deleted.id;
+
+    return {
+      id: deleted.id,
+    };
   }
 }
