@@ -9,8 +9,13 @@ import { ReviewService } from './services/review.service';
 import { ReviewRepository } from './repositories/review.repository';
 import { ReviewPrismaRepository } from './repositories/review.prisma.repository';
 
+import { ImageController } from './controllers/image.controller';
+import { ImageService } from './services/image.service';
+import { ImageRepository } from './repositories/image.repository';
+import { ImagePrismaRepository } from './repositories/image.prisma.repository';
+
 @Module({
-  controllers: [RestaurantController, ReviewController],
+  controllers: [RestaurantController, ReviewController, ImageController],
   providers: [
     RestaurantService,
     {
@@ -21,6 +26,11 @@ import { ReviewPrismaRepository } from './repositories/review.prisma.repository'
     {
       provide: ReviewRepository,
       useClass: ReviewPrismaRepository,
+    },
+    ImageService,
+    {
+      provide: ImageRepository,
+      useClass: ImagePrismaRepository,
     },
   ],
 })

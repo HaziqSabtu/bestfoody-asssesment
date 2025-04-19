@@ -53,6 +53,7 @@ export class RestaurantPrismaRepository implements RestaurantRepository {
           imageId: data.image.id,
           url: data.image.url,
           uploadedAt: data.image.uploadedAt,
+          userId: data.image.userId,
         })
       : null;
 
@@ -113,6 +114,7 @@ export class RestaurantPrismaRepository implements RestaurantRepository {
             imageId: r.image.id,
             url: r.image.url,
             uploadedAt: r.image.uploadedAt,
+            userId: r.image.userId,
           })
         : null;
 
@@ -154,6 +156,7 @@ export class RestaurantPrismaRepository implements RestaurantRepository {
           imageId: updated.image.id,
           url: updated.image.url,
           uploadedAt: updated.image.uploadedAt,
+          userId: updated.image.userId,
         })
       : null;
     return new Restaurant({ ...updated, rating, image: image });
