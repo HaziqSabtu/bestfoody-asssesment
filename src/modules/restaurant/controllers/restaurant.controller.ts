@@ -70,10 +70,11 @@ export class RestaurantController {
   @HttpCode(status.NO_CONTENT)
   async delete(
     @Param('restaurantId', ParamParsePipe) restaurantId: string,
+    @User() user: AuthUser,
   ): Promise<void> {
     await this.restaurantService.delete({
       restaurantId,
-      userId: 'a4c1c840-3d36-4793-a0c3-82aa5c20b9cc',
+      userId: user.userId,
     });
 
     return;
