@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { Image } from '../entities/image.entity';
 import { ImageRepository } from '../repositories/image.repository';
-import { CloudService } from 'src/modules/shared/services/cloud.service';
-import { AuthUser } from 'src/common/interfaces/auth.interface';
+import { CloudService } from '../../shared/services/cloud.service';
+import { AuthUser } from '../../../common/interfaces/auth.interface';
 
 @Injectable()
 export class ImageService {

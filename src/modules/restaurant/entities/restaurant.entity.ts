@@ -44,29 +44,5 @@ export class Restaurant {
     this.rating = rating;
     this.userId = userId;
     this.image = image;
-
-    this.validate();
-  }
-
-  private validate() {
-    if (!this.id) {
-      throw new Error('Restaurant id is required');
-    }
-    if (!this.name) {
-      throw new Error('Restaurant name is required');
-    }
-    if (!this.category) {
-      throw new Error('Restaurant category is required');
-    }
-    if (!this.userId) {
-      throw new Error('Restaurant userId is required');
-    }
-  }
-
-  update(data: Partial<Restaurant>) {
-    this.name = data.name ?? this.name;
-    this.category = data.category ?? this.category;
-
-    return this;
   }
 }
