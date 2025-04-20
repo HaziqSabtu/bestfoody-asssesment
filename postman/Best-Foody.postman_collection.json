@@ -1,0 +1,1526 @@
+{
+	"info": {
+		"_postman_id": "429af0d6-0271-43f1-a247-d7e07bf0f363",
+		"name": "Best-Foody",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32098672"
+	},
+	"item": [
+		{
+			"name": "assesment",
+			"item": [
+				{
+					"name": "restaurants",
+					"item": [
+						{
+							"name": "reviews",
+							"item": [
+								{
+									"name": "Create new review",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"reviewText\": \"This is a review\",\r\n    \"rating\": 3\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:3000/restaurants/{{restaurantId}}/reviews",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"restaurants",
+												"{{restaurantId}}",
+												"reviews"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Create new review",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"reviewText\": \"This is a review\",\r\n    \"rating\": 3\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:3000/restaurants/{{restaurantId}}/reviews",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "3000",
+													"path": [
+														"restaurants",
+														"{{restaurantId}}",
+														"reviews"
+													]
+												}
+											},
+											"status": "Created",
+											"code": 201,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "X-Powered-By",
+													"value": "Express"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Content-Length",
+													"value": "229"
+												},
+												{
+													"key": "ETag",
+													"value": "W/\"e5-h2h96meXL3ZjVRdBDF4o81HW1T8\""
+												},
+												{
+													"key": "Date",
+													"value": "Sun, 20 Apr 2025 03:53:50 GMT"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Keep-Alive",
+													"value": "timeout=5"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"id\": \"380f5718-7171-4562-9f5c-37a6077aef25\",\n    \"rating\": 3,\n    \"reviewText\": \"This is a review\",\n    \"createdAt\": \"2025-04-20T03:53:50.575Z\",\n    \"userId\": \"9b52dd8a-b473-4891-8698-9af88b0a8c8d\",\n    \"restaurantId\": \"1a2db969-8c07-4419-98e3-377a1a44f2f3\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Get reviews by restaurant",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:3000/restaurants/{{restaurantId}}/reviews",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"restaurants",
+												"{{restaurantId}}",
+												"reviews"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Get reviews by restaurant",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "http://localhost:3000/restaurants/{{restaurantId}}/reviews",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "3000",
+													"path": [
+														"restaurants",
+														"{{restaurantId}}",
+														"reviews"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "X-Powered-By",
+													"value": "Express"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Content-Length",
+													"value": "243"
+												},
+												{
+													"key": "ETag",
+													"value": "W/\"f3-OetZUuXOHyI1ihg9dQdPaYJCtC4\""
+												},
+												{
+													"key": "Date",
+													"value": "Sun, 20 Apr 2025 03:55:02 GMT"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Keep-Alive",
+													"value": "timeout=5"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"reviews\": [\n        {\n            \"id\": \"380f5718-7171-4562-9f5c-37a6077aef25\",\n            \"rating\": 5,\n            \"reviewText\": \"Wow, good place!\",\n            \"createdAt\": \"2025-04-20T03:53:50.575Z\",\n            \"userId\": \"9b52dd8a-b473-4891-8698-9af88b0a8c8d\",\n            \"restaurantId\": \"1a2db969-8c07-4419-98e3-377a1a44f2f3\"\n        }\n    ]\n}"
+										}
+									]
+								},
+								{
+									"name": "Update review by Id",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"reviewText\":\"Wow, good place!\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:3000/restaurants/{{restaurantId}}/reviews/ {{reviewId}}",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"restaurants",
+												"{{restaurantId}}",
+												"reviews",
+												" {{reviewId}}"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Update rating",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"rating\":5\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:3000/restaurants/{{restaurantId}}/reviews/ {{reviewId}}",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "3000",
+													"path": [
+														"restaurants",
+														"{{restaurantId}}",
+														"reviews",
+														" {{reviewId}}"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "X-Powered-By",
+													"value": "Express"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Content-Length",
+													"value": "229"
+												},
+												{
+													"key": "ETag",
+													"value": "W/\"e5-Ogmc6PRvjkI/GmvUcQt+xJdGzRI\""
+												},
+												{
+													"key": "Date",
+													"value": "Sun, 20 Apr 2025 03:54:24 GMT"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Keep-Alive",
+													"value": "timeout=5"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"id\": \"380f5718-7171-4562-9f5c-37a6077aef25\",\n    \"rating\": 5,\n    \"reviewText\": \"This is a review\",\n    \"createdAt\": \"2025-04-20T03:53:50.575Z\",\n    \"userId\": \"9b52dd8a-b473-4891-8698-9af88b0a8c8d\",\n    \"restaurantId\": \"1a2db969-8c07-4419-98e3-377a1a44f2f3\"\n}"
+										},
+										{
+											"name": "Update text",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"reviewText\":\"Wow, good place!\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "http://localhost:3000/restaurants/{{restaurantId}}/reviews/ {{reviewId}}",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "3000",
+													"path": [
+														"restaurants",
+														"{{restaurantId}}",
+														"reviews",
+														" {{reviewId}}"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "X-Powered-By",
+													"value": "Express"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Content-Length",
+													"value": "229"
+												},
+												{
+													"key": "ETag",
+													"value": "W/\"e5-LlGqrzzUjFxZKG8YlSljF9NRFGc\""
+												},
+												{
+													"key": "Date",
+													"value": "Sun, 20 Apr 2025 03:54:48 GMT"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Keep-Alive",
+													"value": "timeout=5"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"id\": \"380f5718-7171-4562-9f5c-37a6077aef25\",\n    \"rating\": 5,\n    \"reviewText\": \"Wow, good place!\",\n    \"createdAt\": \"2025-04-20T03:53:50.575Z\",\n    \"userId\": \"9b52dd8a-b473-4891-8698-9af88b0a8c8d\",\n    \"restaurantId\": \"1a2db969-8c07-4419-98e3-377a1a44f2f3\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Delete review by Id",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:3000/restaurants/{{restaurantId}}/reviews/ {{reviewId}}",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"restaurants",
+												"{{restaurantId}}",
+												"reviews",
+												" {{reviewId}}"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Delete review by Id",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "http://localhost:3000/restaurants/{{restaurantId}}/reviews/ {{reviewId}}",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "3000",
+													"path": [
+														"restaurants",
+														"{{restaurantId}}",
+														"reviews",
+														" {{reviewId}}"
+													]
+												}
+											},
+											"status": "No Content",
+											"code": 204,
+											"_postman_previewlanguage": "plain",
+											"header": [
+												{
+													"key": "X-Powered-By",
+													"value": "Express"
+												},
+												{
+													"key": "Date",
+													"value": "Sun, 20 Apr 2025 03:55:07 GMT"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Keep-Alive",
+													"value": "timeout=5"
+												}
+											],
+											"cookie": [],
+											"body": null
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "image",
+							"item": [
+								{
+									"name": "Upload image",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"const response = pm.response.json();\r",
+													"pm.collectionVariables.set(\"uploadedImageId\", response.imageId);"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:3000/restaurants/upload-image",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"restaurants",
+												"upload-image"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Uploaded",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"url": {
+													"raw": "http://localhost:3000/restaurants/upload-image",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "3000",
+													"path": [
+														"restaurants",
+														"upload-image"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "X-Powered-By",
+													"value": "Express"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Content-Length",
+													"value": "188"
+												},
+												{
+													"key": "ETag",
+													"value": "W/\"bc-L60eVnXZxtR3X5fyvWsOnEpB1FU\""
+												},
+												{
+													"key": "Date",
+													"value": "Sun, 20 Apr 2025 03:42:42 GMT"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Keep-Alive",
+													"value": "timeout=5"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"imageId\": \"488956ec-08e0-4442-83f6-979d44875281\",\n    \"url\": \"https://cdn.example.com/1745120562787.jpg\",\n    \"uploadedAt\": \"2025-04-20T03:42:42.838Z\",\n    \"userId\": \"9b52dd8a-b473-4891-8698-9af88b0a8c8d\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Create new restaurant",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Test Restaurant\",\r\n    \"category\": \"MALAYSIAN\",\r\n    \"imageId\": \"{{uploadedImageId}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/restaurants",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"restaurants"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "without Image",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"name\": \"Test Restaurant\",\r\n    \"category\": \"MALAYSIAN\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:3000/restaurants",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"restaurants"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "229"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"e5-e3HfSrnjudZ44LQvLJq15be936w\""
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 20 Apr 2025 03:42:22 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": \"bfbbe8b9-2f0b-4e83-86d5-124aaec3162a\",\n    \"name\": \"Test Restaurant\",\n    \"category\": \"MALAYSIAN\",\n    \"rating\": {\n        \"rating\": 0,\n        \"count\": 0,\n        \"lastUpdatedAt\": \"2025-04-20T03:42:22.070Z\"\n    },\n    \"userId\": \"9b52dd8a-b473-4891-8698-9af88b0a8c8d\",\n    \"image\": null\n}"
+								},
+								{
+									"name": "with Image",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"name\": \"Test Restaurant\",\r\n    \"category\": \"MALAYSIAN\",\r\n    \"imageId\": \"{{uploadedImageId}}\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:3000/restaurants",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"restaurants"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "413"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"19d-DCX6sJMDpiG4EIlMTyT3JtX/8q4\""
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 20 Apr 2025 03:43:15 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": \"1cba0ffb-fff9-4fcc-b596-16b9b9d5e564\",\n    \"name\": \"Test Restaurant\",\n    \"category\": \"MALAYSIAN\",\n    \"rating\": {\n        \"rating\": 0,\n        \"count\": 0,\n        \"lastUpdatedAt\": \"2025-04-20T03:43:15.792Z\"\n    },\n    \"userId\": \"9b52dd8a-b473-4891-8698-9af88b0a8c8d\",\n    \"image\": {\n        \"imageId\": \"488956ec-08e0-4442-83f6-979d44875281\",\n        \"url\": \"https://cdn.example.com/1745120562787.jpg\",\n        \"uploadedAt\": \"2025-04-20T03:42:42.838Z\",\n        \"userId\": \"9b52dd8a-b473-4891-8698-9af88b0a8c8d\"\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Get By Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/restaurants/{{restaurantId}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"restaurants",
+										"{{restaurantId}}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Get By Id",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:3000/restaurants/{{restaurantId}}",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"restaurants",
+												"{{restaurantId}}"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "225"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"e1-fFxzi/DQIxMhh56l2YfK4nlHRSw\""
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 20 Apr 2025 03:45:13 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": \"5bd65799-bdcf-47f0-b05a-a28c374fcae4\",\n    \"name\": \"Wok Street\",\n    \"category\": \"CHINESE\",\n    \"rating\": {\n        \"rating\": 3.7,\n        \"count\": 14,\n        \"lastUpdatedAt\": \"2025-04-19T17:46:50.950Z\"\n    },\n    \"userId\": \"7700fe88-3e86-43e2-b8ff-4491d8185ee6\",\n    \"image\": null\n}"
+								}
+							]
+						},
+						{
+							"name": "Get All",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"pm.collectionVariables.set(\"restaurantCursor\", response.nextCursor);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/restaurants?name=wok",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"restaurants"
+									],
+									"query": [
+										{
+											"key": "category",
+											"value": "CHINESE",
+											"disabled": true
+										},
+										{
+											"key": "cursor",
+											"value": "{{restaurantCursor}}",
+											"disabled": true
+										},
+										{
+											"key": "name",
+											"value": "wok"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Get All",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:3000/restaurants",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"restaurants"
+											],
+											"query": [
+												{
+													"key": "category",
+													"value": "CHINESE1",
+													"disabled": true
+												},
+												{
+													"key": "cursor",
+													"value": "{{restaurantCursor}}",
+													"disabled": true
+												},
+												{
+													"key": "name",
+													"value": "wok",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "3974"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"f86-lvNbumrhg0RZa+g7MAfDLz7dIac\""
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 20 Apr 2025 03:43:33 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"restaurants\": [\n        {\n            \"id\": \"3dd6c75c-c057-4f2e-8a05-5ceb0847f325\",\n            \"name\": \"Curry House\",\n            \"category\": \"INDIAN\",\n            \"rating\": {\n                \"rating\": 3.7,\n                \"count\": 6,\n                \"lastUpdatedAt\": \"2025-04-19T17:46:50.871Z\"\n            },\n            \"userId\": \"9b52dd8a-b473-4891-8698-9af88b0a8c8d\",\n            \"image\": {\n                \"imageId\": \"4c852b0c-46bc-4a43-b17d-a41e412b208c\",\n                \"url\": \"https://cdn.example.com/3dd6c75cc0574f2e8a055ceb0847f325.jpg\",\n                \"uploadedAt\": \"2025-04-19T17:46:50.875Z\",\n                \"userId\": \"9b52dd8a-b473-4891-8698-9af88b0a8c8d\"\n            }\n        },\n        {\n            \"id\": \"5bd65799-bdcf-47f0-b05a-a28c374fcae4\",\n            \"name\": \"Wok Street\",\n            \"category\": \"CHINESE\",\n            \"rating\": {\n                \"rating\": 3.7,\n                \"count\": 14,\n                \"lastUpdatedAt\": \"2025-04-19T17:46:50.950Z\"\n            },\n            \"userId\": \"7700fe88-3e86-43e2-b8ff-4491d8185ee6\",\n            \"image\": null\n        },\n        {\n            \"id\": \"d85f62b4-d352-4aeb-a480-6ab221f648e6\",\n            \"name\": \"Burger Sultan\",\n            \"category\": \"MALAYSIAN\",\n            \"rating\": {\n                \"rating\": 3.5,\n                \"count\": 24,\n                \"lastUpdatedAt\": \"2025-04-19T17:46:50.859Z\"\n            },\n            \"userId\": \"f32fde5f-9ad6-4288-aca6-5873670a8db2\",\n            \"image\": {\n                \"imageId\": \"9641bbde-6249-4b05-9ad6-74bb418b7db7\",\n                \"url\": \"https://cdn.example.com/d85f62b4d3524aeba4806ab221f648e6.jpg\",\n                \"uploadedAt\": \"2025-04-19T17:46:50.864Z\",\n                \"userId\": \"f32fde5f-9ad6-4288-aca6-5873670a8db2\"\n            }\n        },\n        {\n            \"id\": \"a8aae9ab-dcbf-4e3d-82dc-c7ed52309948\",\n            \"name\": \"Biryani Bros\",\n            \"category\": \"INDIAN\",\n            \"rating\": {\n                \"rating\": 3.5,\n                \"count\": 51,\n                \"lastUpdatedAt\": \"2025-04-19T17:46:51.155Z\"\n            },\n            \"userId\": \"f32fde5f-9ad6-4288-aca6-5873670a8db2\",\n            \"image\": null\n        },\n        {\n            \"id\": \"758e7d83-502c-4f8c-b7d2-f0f5b694384e\",\n            \"name\": \"Sushi Street\",\n            \"category\": \"JAPANESE\",\n            \"rating\": {\n                \"rating\": 3.4,\n                \"count\": 5,\n                \"lastUpdatedAt\": \"2025-04-19T17:46:50.771Z\"\n            },\n            \"userId\": \"701dfad6-b04e-4c11-b051-5dce8d614f43\",\n            \"image\": {\n                \"imageId\": \"cdb5e671-746e-4167-93ea-5f47e69dfcb6\",\n                \"url\": \"https://cdn.example.com/758e7d83502c4f8cb7d2f0f5b694384e.jpg\",\n                \"uploadedAt\": \"2025-04-19T17:46:50.775Z\",\n                \"userId\": \"701dfad6-b04e-4c11-b051-5dce8d614f43\"\n            }\n        },\n        {\n            \"id\": \"bc199fae-77e8-4216-80f1-d5fedeb05892\",\n            \"name\": \"Spice Nation\",\n            \"category\": \"INDIAN\",\n            \"rating\": {\n                \"rating\": 3.4,\n                \"count\": 17,\n                \"lastUpdatedAt\": \"2025-04-19T17:46:50.909Z\"\n            },\n            \"userId\": \"f32fde5f-9ad6-4288-aca6-5873670a8db2\",\n            \"image\": {\n                \"imageId\": \"8a736816-a6b8-4b9c-bb3c-e0d9ae954f14\",\n                \"url\": \"https://cdn.example.com/bc199fae77e8421680f1d5fedeb05892.jpg\",\n                \"uploadedAt\": \"2025-04-19T17:46:50.915Z\",\n                \"userId\": \"f32fde5f-9ad6-4288-aca6-5873670a8db2\"\n            }\n        },\n        {\n            \"id\": \"3932542f-5b37-4fec-9514-d2eafd4c88e6\",\n            \"name\": \"Kuala Kitchen\",\n            \"category\": \"MALAYSIAN\",\n            \"rating\": {\n                \"rating\": 3.4,\n                \"count\": 19,\n                \"lastUpdatedAt\": \"2025-04-19T17:46:51.566Z\"\n            },\n            \"userId\": \"f32fde5f-9ad6-4288-aca6-5873670a8db2\",\n            \"image\": {\n                \"imageId\": \"195ae9e4-3006-496b-96ed-0f00e8b0681e\",\n                \"url\": \"https://cdn.example.com/3932542f5b374fec9514d2eafd4c88e6.jpg\",\n                \"uploadedAt\": \"2025-04-19T17:46:51.568Z\",\n                \"userId\": \"f32fde5f-9ad6-4288-aca6-5873670a8db2\"\n            }\n        },\n        {\n            \"id\": \"2470226b-ebc2-45b4-acbe-6728d8f6b11c\",\n            \"name\": \"Sushi Palace\",\n            \"category\": \"JAPANESE\",\n            \"rating\": {\n                \"rating\": 3.3,\n                \"count\": 50,\n                \"lastUpdatedAt\": \"2025-04-19T17:46:50.747Z\"\n            },\n            \"userId\": \"e047fe13-061e-46da-b881-cdedc9e558ef\",\n            \"image\": {\n                \"imageId\": \"ddfd2d33-2d47-4020-b1bc-956d2cb090f7\",\n                \"url\": \"https://cdn.example.com/2470226bebc245b4acbe6728d8f6b11c.jpg\",\n                \"uploadedAt\": \"2025-04-19T17:46:50.750Z\",\n                \"userId\": \"e047fe13-061e-46da-b881-cdedc9e558ef\"\n            }\n        },\n        {\n            \"id\": \"e2699618-8a6b-4cc3-a105-b7acc60e992c\",\n            \"name\": \"La Trattoria\",\n            \"category\": \"ITALIAN\",\n            \"rating\": {\n                \"rating\": 3.3,\n                \"count\": 12,\n                \"lastUpdatedAt\": \"2025-04-19T17:46:51.029Z\"\n            },\n            \"userId\": \"e047fe13-061e-46da-b881-cdedc9e558ef\",\n            \"image\": {\n                \"imageId\": \"57c58e33-982e-4ad2-8657-78113dac2451\",\n                \"url\": \"https://cdn.example.com/e26996188a6b4cc3a105b7acc60e992c.jpg\",\n                \"uploadedAt\": \"2025-04-19T17:46:51.035Z\",\n                \"userId\": \"e047fe13-061e-46da-b881-cdedc9e558ef\"\n            }\n        },\n        {\n            \"id\": \"8d1e9184-6d01-47df-928d-1fc856efe1b4\",\n            \"name\": \"Nippon Grill\",\n            \"category\": \"JAPANESE\",\n            \"rating\": {\n                \"rating\": 3.3,\n                \"count\": 18,\n                \"lastUpdatedAt\": \"2025-04-19T17:46:51.108Z\"\n            },\n            \"userId\": \"7308bb51-50dc-4590-90fb-be3178959810\",\n            \"image\": {\n                \"imageId\": \"eecbef01-29b4-4330-94ef-ecc3ba17d988\",\n                \"url\": \"https://cdn.example.com/8d1e91846d0147df928d1fc856efe1b4.jpg\",\n                \"uploadedAt\": \"2025-04-19T17:46:51.111Z\",\n                \"userId\": \"7308bb51-50dc-4590-90fb-be3178959810\"\n            }\n        }\n    ],\n    \"nextCursor\": \"8d1e9184-6d01-47df-928d-1fc856efe1b4\"\n}"
+								},
+								{
+									"name": "Pagination",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:3000/restaurants?cursor={{restaurantCursor}}",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"restaurants"
+											],
+											"query": [
+												{
+													"key": "category",
+													"value": "CHINESE1",
+													"disabled": true
+												},
+												{
+													"key": "cursor",
+													"value": "{{restaurantCursor}}"
+												},
+												{
+													"key": "name",
+													"value": "wok",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "3986"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"f92-B4CuzFznR89iDJrQewLBusW6cHo\""
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 20 Apr 2025 03:43:48 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"restaurants\": [\n        {\n            \"id\": \"56d19f81-1c4c-4d58-ac63-0231aaa8bb97\",\n            \"name\": \"Tea & Wok\",\n            \"category\": \"CHINESE\",\n            \"rating\": {\n                \"rating\": 3.3,\n                \"count\": 59,\n                \"lastUpdatedAt\": \"2025-04-19T17:46:51.495Z\"\n            },\n            \"userId\": \"e047fe13-061e-46da-b881-cdedc9e558ef\",\n            \"image\": {\n                \"imageId\": \"a74dbbc8-9484-474d-bc4d-a7e1f0cc762f\",\n                \"url\": \"https://cdn.example.com/56d19f811c4c4d58ac630231aaa8bb97.jpg\",\n                \"uploadedAt\": \"2025-04-19T17:46:51.498Z\",\n                \"userId\": \"e047fe13-061e-46da-b881-cdedc9e558ef\"\n            }\n        },\n        {\n            \"id\": \"aab64983-5b6f-4116-a253-c2d83b3c0a0a\",\n            \"name\": \"Risotto Room\",\n            \"category\": \"ITALIAN\",\n            \"rating\": {\n                \"rating\": 3.3,\n                \"count\": 29,\n                \"lastUpdatedAt\": \"2025-04-19T17:46:51.826Z\"\n            },\n            \"userId\": \"f32fde5f-9ad6-4288-aca6-5873670a8db2\",\n            \"image\": {\n                \"imageId\": \"aece13c0-b8eb-4944-ad42-e75bff9943cc\",\n                \"url\": \"https://cdn.example.com/aab649835b6f4116a253c2d83b3c0a0a.jpg\",\n                \"uploadedAt\": \"2025-04-19T17:46:51.829Z\",\n                \"userId\": \"f32fde5f-9ad6-4288-aca6-5873670a8db2\"\n            }\n        },\n        {\n            \"id\": \"c32589ee-c29c-466d-8ade-f8c81a4cd4a1\",\n            \"name\": \"McDonald Burger\",\n            \"category\": \"JAPANESE\",\n            \"rating\": {\n                \"rating\": 3.2,\n                \"count\": 44,\n                \"lastUpdatedAt\": \"2025-04-19T17:46:50.811Z\"\n            },\n            \"userId\": \"9b52dd8a-b473-4891-8698-9af88b0a8c8d\",\n            \"image\": {\n                \"imageId\": \"faabaa78-bde4-4936-bc3e-872c27a9cce5\",\n                \"url\": \"https://cdn.example.com/c32589eec29c466d8adef8c81a4cd4a1.jpg\",\n                \"uploadedAt\": \"2025-04-19T17:46:50.815Z\",\n                \"userId\": \"9b52dd8a-b473-4891-8698-9af88b0a8c8d\"\n            }\n        },\n        {\n            \"id\": \"4cfcfa89-97c0-46e2-ab43-8e1b7ab52f56\",\n            \"name\": \"Golden Panda\",\n            \"category\": \"CHINESE\",\n            \"rating\": {\n                \"rating\": 3.2,\n                \"count\": 40,\n                \"lastUpdatedAt\": \"2025-04-19T17:46:50.955Z\"\n            },\n            \"userId\": \"fdf0f680-3a80-40cd-9539-c74cef953cf5\",\n            \"image\": {\n                \"imageId\": \"1ac103c8-246e-4078-8442-c5b1a62804dc\",\n                \"url\": \"https://cdn.example.com/4cfcfa8997c046e2ab438e1b7ab52f56.jpg\",\n                \"uploadedAt\": \"2025-04-19T17:46:50.959Z\",\n                \"userId\": \"fdf0f680-3a80-40cd-9539-c74cef953cf5\"\n            }\n        },\n        {\n            \"id\": \"4cdc910f-302b-4a00-95c6-6cb6b1c04c74\",\n            \"name\": \"Ramen Ramen\",\n            \"category\": \"JAPANESE\",\n            \"rating\": {\n                \"rating\": 3.2,\n                \"count\": 50,\n                \"lastUpdatedAt\": \"2025-04-19T17:46:51.367Z\"\n            },\n            \"userId\": \"fdf0f680-3a80-40cd-9539-c74cef953cf5\",\n            \"image\": {\n                \"imageId\": \"8b30b1a8-22c6-45f5-af07-3cf2fd914d49\",\n                \"url\": \"https://cdn.example.com/4cdc910f302b4a0095c66cb6b1c04c74.jpg\",\n                \"uploadedAt\": \"2025-04-19T17:46:51.370Z\",\n                \"userId\": \"fdf0f680-3a80-40cd-9539-c74cef953cf5\"\n            }\n        },\n        {\n            \"id\": \"85b47aab-85cd-427e-9240-2d4fcfa3ee5e\",\n            \"name\": \"Hotpot Heaven\",\n            \"category\": \"CHINESE\",\n            \"rating\": {\n                \"rating\": 3.2,\n                \"count\": 43,\n                \"lastUpdatedAt\": \"2025-04-19T17:46:51.489Z\"\n            },\n            \"userId\": \"701dfad6-b04e-4c11-b051-5dce8d614f43\",\n            \"image\": null\n        },\n        {\n            \"id\": \"2bab17e8-4925-4e19-bad5-b237343fa53d\",\n            \"name\": \"Langkawi Bites\",\n            \"category\": \"MALAYSIAN\",\n            \"rating\": {\n                \"rating\": 3.2,\n                \"count\": 22,\n                \"lastUpdatedAt\": \"2025-04-19T17:46:51.577Z\"\n            },\n            \"userId\": \"d88d616a-c8ea-44c8-a51b-4fbbb509cedb\",\n            \"image\": null\n        },\n        {\n            \"id\": \"8f3b639a-e6dd-4e0c-834f-c1aa2c436c70\",\n            \"name\": \"Malacca Meals\",\n            \"category\": \"MALAYSIAN\",\n            \"rating\": {\n                \"rating\": 3.2,\n                \"count\": 54,\n                \"lastUpdatedAt\": \"2025-04-19T17:46:51.581Z\"\n            },\n            \"userId\": \"7700fe88-3e86-43e2-b8ff-4491d8185ee6\",\n            \"image\": {\n                \"imageId\": \"d52f67e1-0699-4d00-bf36-537e46394917\",\n                \"url\": \"https://cdn.example.com/8f3b639ae6dd4e0c834fc1aa2c436c70.jpg\",\n                \"uploadedAt\": \"2025-04-19T17:46:51.586Z\",\n                \"userId\": \"7700fe88-3e86-43e2-b8ff-4491d8185ee6\"\n            }\n        },\n        {\n            \"id\": \"0a5ab0c4-9dee-4e17-bb17-542d984d0b5a\",\n            \"name\": \"Taste of Sabah\",\n            \"category\": \"MALAYSIAN\",\n            \"rating\": {\n                \"rating\": 3.2,\n                \"count\": 57,\n                \"lastUpdatedAt\": \"2025-04-19T17:46:51.873Z\"\n            },\n            \"userId\": \"fdf0f680-3a80-40cd-9539-c74cef953cf5\",\n            \"image\": {\n                \"imageId\": \"01c329d7-fc50-479a-895b-507d622ec888\",\n                \"url\": \"https://cdn.example.com/0a5ab0c49dee4e17bb17542d984d0b5a.jpg\",\n                \"uploadedAt\": \"2025-04-19T17:46:51.877Z\",\n                \"userId\": \"fdf0f680-3a80-40cd-9539-c74cef953cf5\"\n            }\n        },\n        {\n            \"id\": \"f6202b23-b80e-4b95-b385-05c478afbef9\",\n            \"name\": \"Curry Kingdom\",\n            \"category\": \"INDIAN\",\n            \"rating\": {\n                \"rating\": 3.1,\n                \"count\": 33,\n                \"lastUpdatedAt\": \"2025-04-19T17:46:50.897Z\"\n            },\n            \"userId\": \"e05b0d37-db93-41ce-b438-7c664f17b541\",\n            \"image\": {\n                \"imageId\": \"4cb1cded-73b6-48b0-ba60-9130d12d6912\",\n                \"url\": \"https://cdn.example.com/f6202b23b80e4b95b38505c478afbef9.jpg\",\n                \"uploadedAt\": \"2025-04-19T17:46:50.900Z\",\n                \"userId\": \"e05b0d37-db93-41ce-b438-7c664f17b541\"\n            }\n        }\n    ],\n    \"nextCursor\": \"f6202b23-b80e-4b95-b385-05c478afbef9\"\n}"
+								},
+								{
+									"name": "Filter by Category",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:3000/restaurants",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"restaurants"
+											],
+											"query": [
+												{
+													"key": "category",
+													"value": "CHINESE",
+													"disabled": true
+												},
+												{
+													"key": "cursor",
+													"value": "{{restaurantCursor}}",
+													"disabled": true
+												},
+												{
+													"key": "name",
+													"value": "wok",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "3960"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"f78-n+lKLsmsfm5OPrUGFIb4axZqh3E\""
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 20 Apr 2025 03:44:32 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"restaurants\": [\n        {\n            \"id\": \"5bd65799-bdcf-47f0-b05a-a28c374fcae4\",\n            \"name\": \"Wok Street\",\n            \"category\": \"CHINESE\",\n            \"rating\": {\n                \"rating\": 3.7,\n                \"count\": 14,\n                \"lastUpdatedAt\": \"2025-04-19T17:46:50.950Z\"\n            },\n            \"userId\": \"7700fe88-3e86-43e2-b8ff-4491d8185ee6\",\n            \"image\": null\n        },\n        {\n            \"id\": \"56d19f81-1c4c-4d58-ac63-0231aaa8bb97\",\n            \"name\": \"Tea & Wok\",\n            \"category\": \"CHINESE\",\n            \"rating\": {\n                \"rating\": 3.3,\n                \"count\": 59,\n                \"lastUpdatedAt\": \"2025-04-19T17:46:51.495Z\"\n            },\n            \"userId\": \"e047fe13-061e-46da-b881-cdedc9e558ef\",\n            \"image\": {\n                \"imageId\": \"a74dbbc8-9484-474d-bc4d-a7e1f0cc762f\",\n                \"url\": \"https://cdn.example.com/56d19f811c4c4d58ac630231aaa8bb97.jpg\",\n                \"uploadedAt\": \"2025-04-19T17:46:51.498Z\",\n                \"userId\": \"e047fe13-061e-46da-b881-cdedc9e558ef\"\n            }\n        },\n        {\n            \"id\": \"4cfcfa89-97c0-46e2-ab43-8e1b7ab52f56\",\n            \"name\": \"Golden Panda\",\n            \"category\": \"CHINESE\",\n            \"rating\": {\n                \"rating\": 3.2,\n                \"count\": 40,\n                \"lastUpdatedAt\": \"2025-04-19T17:46:50.955Z\"\n            },\n            \"userId\": \"fdf0f680-3a80-40cd-9539-c74cef953cf5\",\n            \"image\": {\n                \"imageId\": \"1ac103c8-246e-4078-8442-c5b1a62804dc\",\n                \"url\": \"https://cdn.example.com/4cfcfa8997c046e2ab438e1b7ab52f56.jpg\",\n                \"uploadedAt\": \"2025-04-19T17:46:50.959Z\",\n                \"userId\": \"fdf0f680-3a80-40cd-9539-c74cef953cf5\"\n            }\n        },\n        {\n            \"id\": \"85b47aab-85cd-427e-9240-2d4fcfa3ee5e\",\n            \"name\": \"Hotpot Heaven\",\n            \"category\": \"CHINESE\",\n            \"rating\": {\n                \"rating\": 3.2,\n                \"count\": 43,\n                \"lastUpdatedAt\": \"2025-04-19T17:46:51.489Z\"\n            },\n            \"userId\": \"701dfad6-b04e-4c11-b051-5dce8d614f43\",\n            \"image\": null\n        },\n        {\n            \"id\": \"d0934a65-3601-405a-9f6b-01fa7b6ae260\",\n            \"name\": \"Lotus Kitchen\",\n            \"category\": \"CHINESE\",\n            \"rating\": {\n                \"rating\": 3.1,\n                \"count\": 67,\n                \"lastUpdatedAt\": \"2025-04-19T17:46:51.742Z\"\n            },\n            \"userId\": \"fdf0f680-3a80-40cd-9539-c74cef953cf5\",\n            \"image\": {\n                \"imageId\": \"f606f8df-118c-416a-8fee-ce3637521f9b\",\n                \"url\": \"https://cdn.example.com/d0934a653601405a9f6b01fa7b6ae260.jpg\",\n                \"uploadedAt\": \"2025-04-19T17:46:51.746Z\",\n                \"userId\": \"fdf0f680-3a80-40cd-9539-c74cef953cf5\"\n            }\n        },\n        {\n            \"id\": \"ba7a0400-e901-406a-a2f1-e681d1795828\",\n            \"name\": \"Dragon Wok\",\n            \"category\": \"CHINESE\",\n            \"rating\": {\n                \"rating\": 3,\n                \"count\": 53,\n                \"lastUpdatedAt\": \"2025-04-19T17:46:50.938Z\"\n            },\n            \"userId\": \"701dfad6-b04e-4c11-b051-5dce8d614f43\",\n            \"image\": {\n                \"imageId\": \"9335816e-7a19-4ee0-973f-7bb063cb4d43\",\n                \"url\": \"https://cdn.example.com/ba7a0400e901406aa2f1e681d1795828.jpg\",\n                \"uploadedAt\": \"2025-04-19T17:46:50.943Z\",\n                \"userId\": \"701dfad6-b04e-4c11-b051-5dce8d614f43\"\n            }\n        },\n        {\n            \"id\": \"7c7023ef-fa68-46dd-82c5-aa6116c7ba1c\",\n            \"name\": \"Great Wall Diner\",\n            \"category\": \"CHINESE\",\n            \"rating\": {\n                \"rating\": 3,\n                \"count\": 78,\n                \"lastUpdatedAt\": \"2025-04-19T17:46:50.968Z\"\n            },\n            \"userId\": \"e05b0d37-db93-41ce-b438-7c664f17b541\",\n            \"image\": {\n                \"imageId\": \"3166bc00-840c-424e-9815-94ceb4db08a4\",\n                \"url\": \"https://cdn.example.com/7c7023effa6846dd82c5aa6116c7ba1c.jpg\",\n                \"uploadedAt\": \"2025-04-19T17:46:50.971Z\",\n                \"userId\": \"e05b0d37-db93-41ce-b438-7c664f17b541\"\n            }\n        },\n        {\n            \"id\": \"047b950c-ea09-452e-a782-2857b9d1e1e1\",\n            \"name\": \"Beijing Bites\",\n            \"category\": \"CHINESE\",\n            \"rating\": {\n                \"rating\": 3,\n                \"count\": 58,\n                \"lastUpdatedAt\": \"2025-04-19T17:46:50.979Z\"\n            },\n            \"userId\": \"e05b0d37-db93-41ce-b438-7c664f17b541\",\n            \"image\": {\n                \"imageId\": \"eef25164-a33d-4085-b670-b8b6c2628417\",\n                \"url\": \"https://cdn.example.com/047b950cea09452ea7822857b9d1e1e1.jpg\",\n                \"uploadedAt\": \"2025-04-19T17:46:50.984Z\",\n                \"userId\": \"e05b0d37-db93-41ce-b438-7c664f17b541\"\n            }\n        },\n        {\n            \"id\": \"be8277b9-fcd8-49e8-8dcd-6b998683cdd9\",\n            \"name\": \"Peking Chef\",\n            \"category\": \"CHINESE\",\n            \"rating\": {\n                \"rating\": 3,\n                \"count\": 74,\n                \"lastUpdatedAt\": \"2025-04-19T17:46:51.185Z\"\n            },\n            \"userId\": \"e047fe13-061e-46da-b881-cdedc9e558ef\",\n            \"image\": {\n                \"imageId\": \"6a9043ac-70ad-4463-b307-f13ba74f7126\",\n                \"url\": \"https://cdn.example.com/be8277b9fcd849e88dcd6b998683cdd9.jpg\",\n                \"uploadedAt\": \"2025-04-19T17:46:51.189Z\",\n                \"userId\": \"e047fe13-061e-46da-b881-cdedc9e558ef\"\n            }\n        },\n        {\n            \"id\": \"7cf539dd-fd81-4673-a8f3-19de0d777074\",\n            \"name\": \"Wok & Roll\",\n            \"category\": \"CHINESE\",\n            \"rating\": {\n                \"rating\": 3,\n                \"count\": 87,\n                \"lastUpdatedAt\": \"2025-04-19T17:46:51.198Z\"\n            },\n            \"userId\": \"701dfad6-b04e-4c11-b051-5dce8d614f43\",\n            \"image\": {\n                \"imageId\": \"db39a8c0-0390-4c73-86c1-2cd77857355b\",\n                \"url\": \"https://cdn.example.com/7cf539ddfd814673a8f319de0d777074.jpg\",\n                \"uploadedAt\": \"2025-04-19T17:46:51.201Z\",\n                \"userId\": \"701dfad6-b04e-4c11-b051-5dce8d614f43\"\n            }\n        }\n    ],\n    \"nextCursor\": \"7cf539dd-fd81-4673-a8f3-19de0d777074\"\n}"
+								},
+								{
+									"name": "Search by name",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:3000/restaurants?name=wok",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"restaurants"
+											],
+											"query": [
+												{
+													"key": "category",
+													"value": "CHINESE",
+													"disabled": true
+												},
+												{
+													"key": "cursor",
+													"value": "{{restaurantCursor}}",
+													"disabled": true
+												},
+												{
+													"key": "name",
+													"value": "wok"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "2400"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"960-zLSvkv0LMQHadmBZ42f3PP0r7pA\""
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 20 Apr 2025 03:44:45 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"restaurants\": [\n        {\n            \"id\": \"5bd65799-bdcf-47f0-b05a-a28c374fcae4\",\n            \"name\": \"Wok Street\",\n            \"category\": \"CHINESE\",\n            \"rating\": {\n                \"rating\": 3.7,\n                \"count\": 14,\n                \"lastUpdatedAt\": \"2025-04-19T17:46:50.950Z\"\n            },\n            \"userId\": \"7700fe88-3e86-43e2-b8ff-4491d8185ee6\",\n            \"image\": null\n        },\n        {\n            \"id\": \"56d19f81-1c4c-4d58-ac63-0231aaa8bb97\",\n            \"name\": \"Tea & Wok\",\n            \"category\": \"CHINESE\",\n            \"rating\": {\n                \"rating\": 3.3,\n                \"count\": 59,\n                \"lastUpdatedAt\": \"2025-04-19T17:46:51.495Z\"\n            },\n            \"userId\": \"e047fe13-061e-46da-b881-cdedc9e558ef\",\n            \"image\": {\n                \"imageId\": \"a74dbbc8-9484-474d-bc4d-a7e1f0cc762f\",\n                \"url\": \"https://cdn.example.com/56d19f811c4c4d58ac630231aaa8bb97.jpg\",\n                \"uploadedAt\": \"2025-04-19T17:46:51.498Z\",\n                \"userId\": \"e047fe13-061e-46da-b881-cdedc9e558ef\"\n            }\n        },\n        {\n            \"id\": \"ba7a0400-e901-406a-a2f1-e681d1795828\",\n            \"name\": \"Dragon Wok\",\n            \"category\": \"CHINESE\",\n            \"rating\": {\n                \"rating\": 3,\n                \"count\": 53,\n                \"lastUpdatedAt\": \"2025-04-19T17:46:50.938Z\"\n            },\n            \"userId\": \"701dfad6-b04e-4c11-b051-5dce8d614f43\",\n            \"image\": {\n                \"imageId\": \"9335816e-7a19-4ee0-973f-7bb063cb4d43\",\n                \"url\": \"https://cdn.example.com/ba7a0400e901406aa2f1e681d1795828.jpg\",\n                \"uploadedAt\": \"2025-04-19T17:46:50.943Z\",\n                \"userId\": \"701dfad6-b04e-4c11-b051-5dce8d614f43\"\n            }\n        },\n        {\n            \"id\": \"7cf539dd-fd81-4673-a8f3-19de0d777074\",\n            \"name\": \"Wok & Roll\",\n            \"category\": \"CHINESE\",\n            \"rating\": {\n                \"rating\": 3,\n                \"count\": 87,\n                \"lastUpdatedAt\": \"2025-04-19T17:46:51.198Z\"\n            },\n            \"userId\": \"701dfad6-b04e-4c11-b051-5dce8d614f43\",\n            \"image\": {\n                \"imageId\": \"db39a8c0-0390-4c73-86c1-2cd77857355b\",\n                \"url\": \"https://cdn.example.com/7cf539ddfd814673a8f319de0d777074.jpg\",\n                \"uploadedAt\": \"2025-04-19T17:46:51.201Z\",\n                \"userId\": \"701dfad6-b04e-4c11-b051-5dce8d614f43\"\n            }\n        },\n        {\n            \"id\": \"b33d6bc8-0e27-42b0-bf1d-be3c9d7918ea\",\n            \"name\": \"Wok Flame\",\n            \"category\": \"CHINESE\",\n            \"rating\": {\n                \"rating\": 2.8,\n                \"count\": 29,\n                \"lastUpdatedAt\": \"2025-04-19T17:46:51.765Z\"\n            },\n            \"userId\": \"f32fde5f-9ad6-4288-aca6-5873670a8db2\",\n            \"image\": {\n                \"imageId\": \"fe4084ca-e7dc-4f4b-afa3-5afc904aab19\",\n                \"url\": \"https://cdn.example.com/b33d6bc80e2742b0bf1dbe3c9d7918ea.jpg\",\n                \"uploadedAt\": \"2025-04-19T17:46:51.768Z\",\n                \"userId\": \"f32fde5f-9ad6-4288-aca6-5873670a8db2\"\n            }\n        },\n        {\n            \"id\": \"594de7c5-1fe3-4ded-8271-c9d476f6f335\",\n            \"name\": \"Wok Garden\",\n            \"category\": \"CHINESE\",\n            \"rating\": {\n                \"rating\": 2.6,\n                \"count\": 15,\n                \"lastUpdatedAt\": \"2025-04-19T17:46:51.470Z\"\n            },\n            \"userId\": \"7308bb51-50dc-4590-90fb-be3178959810\",\n            \"image\": {\n                \"imageId\": \"61242341-ec16-4624-86c3-20469efd0851\",\n                \"url\": \"https://cdn.example.com/594de7c51fe34ded8271c9d476f6f335.jpg\",\n                \"uploadedAt\": \"2025-04-19T17:46:51.475Z\",\n                \"userId\": \"7308bb51-50dc-4590-90fb-be3178959810\"\n            }\n        }\n    ],\n    \"nextCursor\": null\n}"
+								}
+							]
+						},
+						{
+							"name": "Update by Id",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"category\": \"ITALIAN\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/restaurants/{{restaurantId}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"restaurants",
+										"{{restaurantId}}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Update name",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"name\": \"Cat cafe\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:3000/restaurants/{{restaurantId}}",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"restaurants",
+												"{{restaurantId}}"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "406"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"196-sa53eY7KLJ+rSO/WDFg8LaPVD6Y\""
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 20 Apr 2025 03:46:08 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": \"1cba0ffb-fff9-4fcc-b596-16b9b9d5e564\",\n    \"name\": \"Cat cafe\",\n    \"category\": \"MALAYSIAN\",\n    \"rating\": {\n        \"rating\": 0,\n        \"count\": 0,\n        \"lastUpdatedAt\": \"2025-04-20T03:46:08.370Z\"\n    },\n    \"userId\": \"9b52dd8a-b473-4891-8698-9af88b0a8c8d\",\n    \"image\": {\n        \"imageId\": \"488956ec-08e0-4442-83f6-979d44875281\",\n        \"url\": \"https://cdn.example.com/1745120562787.jpg\",\n        \"uploadedAt\": \"2025-04-20T03:42:42.838Z\",\n        \"userId\": \"9b52dd8a-b473-4891-8698-9af88b0a8c8d\"\n    }\n}"
+								},
+								{
+									"name": "Update category",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"category\": \"ITALIAN\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:3000/restaurants/{{restaurantId}}",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"restaurants",
+												"{{restaurantId}}"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "404"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"194-szVMeoifmPygGwbMULDnsIMYXjI\""
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 20 Apr 2025 03:46:26 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": \"1cba0ffb-fff9-4fcc-b596-16b9b9d5e564\",\n    \"name\": \"Cat cafe\",\n    \"category\": \"ITALIAN\",\n    \"rating\": {\n        \"rating\": 0,\n        \"count\": 0,\n        \"lastUpdatedAt\": \"2025-04-20T03:46:26.124Z\"\n    },\n    \"userId\": \"9b52dd8a-b473-4891-8698-9af88b0a8c8d\",\n    \"image\": {\n        \"imageId\": \"488956ec-08e0-4442-83f6-979d44875281\",\n        \"url\": \"https://cdn.example.com/1745120562787.jpg\",\n        \"uploadedAt\": \"2025-04-20T03:42:42.838Z\",\n        \"userId\": \"9b52dd8a-b473-4891-8698-9af88b0a8c8d\"\n    }\n}"
+								},
+								{
+									"name": "Update Image",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"imageId\": \"{{uploadedImageId}}\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:3000/restaurants/{{restaurantId}}",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"restaurants",
+												"{{restaurantId}}"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "413"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"19d-aEa5YVLjSnS6bESrKbPTAwQzfA0\""
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 20 Apr 2025 03:45:46 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": \"1cba0ffb-fff9-4fcc-b596-16b9b9d5e564\",\n    \"name\": \"Test Restaurant\",\n    \"category\": \"MALAYSIAN\",\n    \"rating\": {\n        \"rating\": 0,\n        \"count\": 0,\n        \"lastUpdatedAt\": \"2025-04-20T03:45:46.437Z\"\n    },\n    \"userId\": \"9b52dd8a-b473-4891-8698-9af88b0a8c8d\",\n    \"image\": {\n        \"imageId\": \"488956ec-08e0-4442-83f6-979d44875281\",\n        \"url\": \"https://cdn.example.com/1745120562787.jpg\",\n        \"uploadedAt\": \"2025-04-20T03:42:42.838Z\",\n        \"userId\": \"9b52dd8a-b473-4891-8698-9af88b0a8c8d\"\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "Delete by Id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/restaurants/{{restaurantId}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"restaurants",
+										"{{restaurantId}}"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Delete by Id",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:3000/restaurants/{{restaurantId}}",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"restaurants",
+												"{{restaurantId}}"
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 20 Apr 2025 03:48:57 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": null
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "auth",
+					"item": [
+						{
+							"name": "Sign In User",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Parse the response body\r",
+											"const response = pm.response.json();\r",
+											"\r",
+											"// Save the token as a collection-level variable\r",
+											"pm.collectionVariables.set(\"accessToken\", response.token);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"alice.smith@example.com\",\r\n    \"password\": \"password123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/auth/sign-in",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"sign-in"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Successfully signed In",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"email\": \"alice.smith@example.com\",\r\n    \"password\": \"password123\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:3000/auth/sign-in",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"auth",
+												"sign-in"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "513"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"201-NVEbm9QQDnIyVpnNQ31IflFUz1g\""
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 20 Apr 2025 03:41:29 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5YjUyZGQ4YS1iNDczLTQ4OTEtODY5OC05YWY4OGIwYThjOGQiLCJlbWFpbCI6ImFsaWNlLnNtaXRoQGV4YW1wbGUuY29tIiwidXNlcklkIjoiOWI1MmRkOGEtYjQ3My00ODkxLTg2OTgtOWFmODhiMGE4YzhkIiwiaXNzIjoiYmVzdGZvb2R5LWFzc3Nlc21lbnQiLCJhdWQiOiJiZXN0Zm9vZHktYXNzc2VzbWVudCIsImlhdCI6MTc0NTEyMDQ4OSwiZXhwIjoxNzQ1MTI0MDg5fQ.fw37nL1ivn6vAf4jMdzboc1jWVU5n7QF6ABFMngPFEw\",\n    \"expiresAt\": \"2025-04-20T04:41:29.098Z\",\n    \"user\": {\n        \"id\": \"9b52dd8a-b473-4891-8698-9af88b0a8c8d\",\n        \"email\": \"alice.smith@example.com\"\n    }\n}"
+								}
+							]
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{accessToken}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "restaurantId",
+			"value": "4ae846c7-6e78-4fee-bcb8-073c7688de5a",
+			"type": "default"
+		},
+		{
+			"key": "reviewId",
+			"value": "330e36b4-1d95-474e-8b07-1d9599c19da3",
+			"type": "default"
+		},
+		{
+			"key": "accessToken",
+			"value": ""
+		},
+		{
+			"key": "restaurantCursor",
+			"value": ""
+		},
+		{
+			"key": "uploadedImageId",
+			"value": ""
+		}
+	]
+}
