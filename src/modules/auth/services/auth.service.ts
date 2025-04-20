@@ -35,8 +35,8 @@ export class AuthService {
       sub: user.id,
       email: user.email,
       userId: user.id,
-      iss: 'bestfoodie-asssesment',
-      aud: 'bestfoodie-asssesment',
+      iss: 'bestfoody-asssesment',
+      aud: 'bestfoody-asssesment',
     };
 
     const options = {

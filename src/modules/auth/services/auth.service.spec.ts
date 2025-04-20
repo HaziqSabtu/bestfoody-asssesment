@@ -80,8 +80,8 @@ describe('AuthService', () => {
           sub: mockUser.id,
           email: mockUser.email,
           userId: mockUser.id,
-          iss: 'bestfoodie-asssesment',
-          aud: 'bestfoodie-asssesment',
+          iss: 'bestfoody-asssesment',
+          aud: 'bestfoody-asssesment',
         },
         {
           expiresIn: '1h',
@@ -138,8 +138,8 @@ describe('AuthService', () => {
         sub: mockUser.id,
         email: mockUser.email,
         userId: mockUser.id,
-        iss: 'bestfoodie-asssesment',
-        aud: 'bestfoodie-asssesment',
+        iss: 'bestfoody-asssesment',
+        aud: 'bestfoody-asssesment',
       };
 
       expect(jwtService.signAsync).toHaveBeenCalledWith(
