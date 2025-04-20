@@ -27,7 +27,7 @@ model Restaurant {
   name      String
   category  RestaurantCategory
   userId    String
-  imageId   String?            @unique
+  imageId   String?            
   createdAt DateTime           @default(now())
   updatedAt DateTime           @updatedAt
   deletedAt DateTime?
@@ -68,7 +68,7 @@ model RestaurantImage {
   userId     String
 
   user       User        @relation(fields: [userId], references: [id])
-  Restaurant Restaurant?
+  Restaurant Restaurant[]
 }
 
 enum RestaurantCategory {
