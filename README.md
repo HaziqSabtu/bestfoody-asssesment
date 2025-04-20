@@ -11,7 +11,7 @@ $ npm run start:dev
 
 - **NestJS** – Scalable Node.js framework
 - **Prisma** – Modern ORM
-- **PostgreSQL** – Database
+- **SQLite** – Database
 - **Zod** – Schema validation
 - **TypeScript** – Type safety
 - **SOLID Principles** – Clean architecture
