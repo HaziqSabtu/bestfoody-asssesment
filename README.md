@@ -70,6 +70,27 @@ $ npm run start:dev
 | PUT    | `/restaurants/:restaurantId/reviews/:reviewId`             | Update a review by ID            |
 | DELETE | `/restaurants/:restaurantId/reviews/:reviewId`             | Delete a review by ID            |
 
+### 🧪 Postman
+A ready-to-use Postman collection is available to simplify testing and interacting with the API.
+
+**To import:**
+
+1. Open Postman.
+
+2. Click the "Import" button.
+
+3. Select the "File" option.
+
+4. Select the Postman collection JSON file located at:
+`postman/Best-Foody.postman_collection.json`
+
+5. Click "Import".
+
+Once imported, you’ll see all the endpoints organized under the Restaurant App collection in your workspace.
+
+This collection includes pre-filled requests for authentication, restaurant operations, image uploads, and reviews. 
+
+
 ## 🚀 Future Improvements
 
 - ✅ **Move rating computation to an event-driven architecture**  
