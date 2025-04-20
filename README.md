@@ -1,4 +1,4 @@
-# bestfoodie-asssesment
+# bestfoody-asssesment
 
 ## 📦 Installation
 
